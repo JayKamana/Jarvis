@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Jarvis.Models;
+using Jarvis.ViewModel;
 
 namespace Jarvis.Controllers
 {
@@ -23,9 +24,10 @@ namespace Jarvis.Controllers
 
         public ActionResult Index()
         {
-            var frds = _context.FRDS.ToList();
+            var frds = _context.FRDS.Include(c => c.Employee).ToList();
 
             return View(frds);
         }
+
     }
 }

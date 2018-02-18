@@ -17,15 +17,17 @@ else
             <tr>
                 <th>Request Id</th>
                 <th>Request Name</th>
+                <th>Demand Owner</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var frd in Model)
             {
                 <tr>
-                    <td>frd.id</td>
-                    <td>frd.name</td>
-                </tr>
+                    <td>@frd.Id</td>
+                    <td>@frd.Name</td>
+                    <td>@frd.Employee.FName @frd.Employee.LName</td>
+</tr>
             }
         </tbody>
     </table>

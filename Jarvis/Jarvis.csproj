@@ -196,6 +196,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802181515569_InitialModel.cs" />
+    <Compile Include="Migrations\201802181515569_InitialModel.Designer.cs">
+      <DependentUpon>201802181515569_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802181522008_AddEmployeeTable.cs" />
+    <Compile Include="Migrations\201802181522008_AddEmployeeTable.Designer.cs">
+      <DependentUpon>201802181522008_AddEmployeeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\FRD.cs" />
@@ -203,6 +212,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\FRDDisplayViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -278,6 +288,14 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201802181515569_InitialModel.resx">
+      <DependentUpon>201802181515569_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802181522008_AddEmployeeTable.resx">
+      <DependentUpon>201802181522008_AddEmployeeTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
