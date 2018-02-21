@@ -53,7 +53,7 @@ namespace Jarvis.Controllers.Api
             return Created(new Uri(Request.RequestUri + "/" + frd.Id), frdDto);
         }
 
-        //PUT  /api/frd/1
+        //PUT  /api/frds/1
         [HttpPut]
         public IHttpActionResult UpdateCustomer(int id, FRDDtos frdDto)
         {
@@ -73,7 +73,7 @@ namespace Jarvis.Controllers.Api
 
         }
 
-        //DELETE    /api/frd/1
+        //DELETE    /api/frds/1
         [HttpDelete]
         public IHttpActionResult DeleteCustomer(int id)
         {

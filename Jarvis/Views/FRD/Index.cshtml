@@ -12,12 +12,13 @@
 
 else
 {
-    <table class="table table-bordered table-hover">
+    <table id="frds" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Request Id</th>
                 <th>Request Name</th>
                 <th>Demand Owner</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -27,8 +28,36 @@ else
                     <td>@frd.Id</td>
                     <td>@frd.Name</td>
                     <td>@frd.Employee.FName @frd.Employee.LName</td>
+                    <td>
+                        <button data-frd-id="@frd.Id" class="btn-link js-delete">Delete</button>
+                    </td>
 </tr>
             }
         </tbody>
     </table>
+}
+
+@section scripts
+{
+   <script>
+       $(function () { 
+       
+           $('#frds').on('click', '.js-delete', function () {
+               var button = $(this);
+               bootbox.confirm("Are you sure you want to delete this FRD?", function (result) {
+                   if (result) {
+                       $.ajax({
+                           url: "/api/frds/" + button.attr("data-frd-id"),
+                           method: "DELETE",
+                           success: function () {
+                               button.parents("tr").remove();
+                           }
+
+                       })
+                   }
+               })
+           })
+
+       })
+    </script>
 }
