@@ -54,15 +54,15 @@ namespace Jarvis
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "165749857549685",
+               appSecret: "dabd1459c41f731af6d782cfaa62fac2");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "956984696611-ke9to326ltl1l01pjpi6qoarhh8p34t4.apps.googleusercontent.com",
+                ClientSecret = "WeJqUheIAJyfdt0qSSE5e6ya"
+            });
         }
     }
 }

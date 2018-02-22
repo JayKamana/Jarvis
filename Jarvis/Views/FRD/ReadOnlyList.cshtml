@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Jarvis.Models.FRD>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>FRD List</h2>
+
+@if (!Model.Any())
+{
+    <p>There are no FRD's Available</p>
+}
+
+else
+{
+    <table id="frds" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Request Id</th>
+                <th>Request Name</th>
+                <th>Demand Owner</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var frd in Model)
+            {
+                <tr>
+                    <td>@frd.Id</td>
+                    <td>@frd.Name</td>
+                    <td>@frd.Employee.FName @frd.Employee.LName</td>
+</tr>
+            }
+        </tbody>
+    </table>
+}
