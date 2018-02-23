@@ -10,6 +10,7 @@ using AutoMapper;
 
 namespace Jarvis.Controllers.Api
 {
+    [Authorize(Roles = RoleName.CanManageFRD)]
     public class FrdsController : ApiController
     {
         private ApplicationDbContext _context;
