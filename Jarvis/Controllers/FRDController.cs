@@ -24,7 +24,7 @@ namespace Jarvis.Controllers
 
         public ActionResult Index()
         {
-            var frds = _context.FRDS.Include(c => c.Employee).ToList();
+            var frds = _context.FRDS.Include(c => c.User).ToList();
             if(User.IsInRole(RoleName.CanManageFRD))
                 return View("List", frds);
 
