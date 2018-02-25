@@ -46,6 +46,7 @@ else
                var button = $(this);
                bootbox.confirm("Are you sure you want to delete this FRD?", function (result) {
                    if (result) {
+
                        $.ajax({
                            url: "/api/frds/" + button.attr("data-frd-id"),
                            method: "DELETE",

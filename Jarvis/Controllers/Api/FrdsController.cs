@@ -8,6 +8,8 @@ using System.Web.Http;
 using Jarvis.Models;
 using Jarvis.Dtos;
 using AutoMapper;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Jarvis.Controllers.Api
 {
@@ -22,6 +24,7 @@ namespace Jarvis.Controllers.Api
         }
 
         //GET /api/frds
+       // [Authorize(Roles = RoleName.CanManageFRD)]
         public IHttpActionResult GetFRDS()
         {
             var frdDtos = _context.FRDS.ToList().Select(Mapper.Map<FRD, FRDDtos>);
@@ -76,6 +79,7 @@ namespace Jarvis.Controllers.Api
         }
 
         //DELETE    /api/frds/1
+        [Authorize(Roles = RoleName.CanManageFRD)]
         [HttpDelete]
         public IHttpActionResult DeleteCustomer(int id)
         {
