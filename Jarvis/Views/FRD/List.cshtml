@@ -29,9 +29,9 @@ else
                     <td>@frd.Name</td>
                     <td>@frd.User.UserName</td>
                     <td>
-                        <button data-frd-id="@frd.Id" class="btn-link js-delete">Delete</button>
+                        <button data-frd-id="@frd.Id"  class="btn-link js-delete">Delete</button>
                     </td>
-</tr>
+                </tr>
             }
         </tbody>
     </table>
@@ -39,22 +39,52 @@ else
 
 @section scripts
 {
-   <script>
-       $(function () { 
-       
+    <script>
+       $(function () {
+
            $('#frds').on('click', '.js-delete', function () {
                var button = $(this);
+
                bootbox.confirm("Are you sure you want to delete this FRD?", function (result) {
                    if (result) {
 
-                       $.ajax({
-                           url: "/api/frds/" + button.attr("data-frd-id"),
-                           method: "DELETE",
-                           success: function () {
-                               button.parents("tr").remove();
-                           }
+                       //var body = {
+                       //    grant_type: 'password',
+                       //    username: 'admin@jarvis.com',
+                       //    password: 'Qwerty@1234'
+                       //};
 
-                       })
+                       //$.ajax({
+                       //    url: '/Token',
+                       //    type: 'POST',
+                       //    dataType: 'json',
+                       //    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                       //    data: body,
+                       //    success: function (result) {
+                       //        console.log(result);
+                       //        $.ajax({
+                       //            url: "/api/frds/" + button.attr("data-frd-id"),
+                       //            method: "DELETE",
+                       //            headers: {
+                       //               authorization: 'Bearer ' + result.access_token
+                       //          },
+                       //            success: function () {
+                       //                button.parents("tr").remove();
+                       //            }
+
+                       //        })
+                       //   }
+                       //});
+
+                               $.ajax({
+                                   url: "/api/frds/" + button.attr("data-frd-id"),
+                                   method: "DELETE",
+                                   success: function () {
+                                       button.parents("tr").remove();
+                                   }
+
+                               })
+
                    }
                })
            })

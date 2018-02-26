@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace Jarvis.Controllers.Api
 {
-   // [Authorize(Roles = RoleName.CanManageFRD)]
+    [Authorize]
     public class FrdsController : ApiController
     {
         private ApplicationDbContext _context;
@@ -24,7 +24,7 @@ namespace Jarvis.Controllers.Api
         }
 
         //GET /api/frds
-       // [Authorize(Roles = RoleName.CanManageFRD)]
+        [HttpGet]
         public IHttpActionResult GetFRDS()
         {
             var frdDtos = _context.FRDS.ToList().Select(Mapper.Map<FRD, FRDDtos>);
@@ -33,6 +33,7 @@ namespace Jarvis.Controllers.Api
         }
 
         //GET /api/frds/1
+        [HttpGet]
         public IHttpActionResult GetFRD(int id)
         {
             var frd = _context.FRDS.SingleOrDefault(c => c.Id == id);

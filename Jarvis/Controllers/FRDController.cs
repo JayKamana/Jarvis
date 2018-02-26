@@ -22,6 +22,7 @@ namespace Jarvis.Controllers
             _context.Dispose();
         }
 
+
         public ActionResult Index()
         {
             var frds = _context.FRDS.Include(c => c.User).ToList();

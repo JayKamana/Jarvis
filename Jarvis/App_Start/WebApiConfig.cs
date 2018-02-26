@@ -31,6 +31,9 @@ namespace Jarvis
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             settings.Formatting = Formatting.Indented;
 
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
             config.Routes.MapHttpRoute(
                 name: "defaultapi",
                 routeTemplate: "api/{controller}/{id}",
@@ -39,11 +42,10 @@ namespace Jarvis
 
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
-            config.SuppressDefaultHostAuthentication();
-            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+          //  config.SuppressDefaultHostAuthentication();
+          //  config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            
 
-            // Web API routes
-            config.MapHttpAttributeRoutes();
         }
     }
 }
