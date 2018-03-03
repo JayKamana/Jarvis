@@ -27,22 +27,24 @@ namespace Jarvis.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetFRDS()
         {
-            var frdDtos = _context.FRDS.ToList().Select(Mapper.Map<FRD, FRDDtos>);
+            var userid = User.Identity.GetUserId();
+            var frd = _context.FRDS.SingleOrDefault(f => f.UserId == userid);
+           // var frdDtos = _context.FRDS.ToList().Select(Mapper.Map<FRD, FRDDtos>);
 
-            return Ok(frdDtos);
+            return Ok(frd);
         }
 
         //GET /api/frds/1
-        [HttpGet]
-        public IHttpActionResult GetFRD(int id)
-        {
-            var frd = _context.FRDS.SingleOrDefault(c => c.Id == id);
+        //[HttpGet]
+        //public IHttpActionResult GetFRD(int id)
+        //{
+        //    var frd = _context.FRDS.SingleOrDefault(c => c.Id == id);
 
-            if (frd == null)
-                return NotFound();
+        //    if (frd == null)
+        //        return NotFound();
 
-            return Ok(Mapper.Map<FRD, FRDDtos>(frd));
-        }
+        //    return Ok(Mapper.Map<FRD, FRDDtos>(frd));
+        //}
 
         //POST /api/frds
         [HttpPost]
@@ -94,6 +96,7 @@ namespace Jarvis.Controllers.Api
 
             return Ok();
         }
+
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -46,5 +47,12 @@ namespace Jarvis.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Jarvis.Models.SMSCode> SMSCodes { get; set; }
+
+        public System.Data.Entity.DbSet<Jarvis.Models.SMSDemand> SMSDemands { get; set; }
+
+
+        public IEnumerable FRDs { get; internal set; }
     }
 }

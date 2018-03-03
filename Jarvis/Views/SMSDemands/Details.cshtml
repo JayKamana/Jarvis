@@ -1,0 +1,58 @@
+﻿@model Jarvis.Models.SMSDemand
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SMSDemand</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FRD.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FRD.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SMSCode.CodeDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SMSCode.CodeDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content_tr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content_tr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content_en)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content_en)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

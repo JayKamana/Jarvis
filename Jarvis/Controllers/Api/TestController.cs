@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -15,7 +16,7 @@ namespace Jarvis.Controllers.Api
         [HttpGet]
         public HttpResponseMessage HelloWorld()
         {
-            return Request.CreateResponse(HttpStatusCode.OK, "Hello");
+            return Request.CreateResponse(HttpStatusCode.OK, User.Identity.GetUserId());
         }
 
 
