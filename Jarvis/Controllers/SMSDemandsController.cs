@@ -18,7 +18,7 @@ namespace Jarvis.Controllers
         // GET: SMSDemands
         public ActionResult Index()
         {
-            var sMSDemands = db.SMSDemands.Include(s => s.FRD).Include(s => s.SMSCode).Include(s => s.User);
+            var sMSDemands = db.SMSDemands.Include(s => s.SMSCode).Include(s => s.User);
             return View(sMSDemands.ToList());
         }
 
@@ -61,7 +61,6 @@ namespace Jarvis.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.FRDId = new SelectList(db.FRDS, "Id", "Name", sMSDemand.FRDId);
             ViewBag.SMSCodeId = new SelectList(db.SMSCodes, "Id", "CodeDescription", sMSDemand.SMSCodeId);
             return View(sMSDemand);
         }
@@ -78,7 +77,6 @@ namespace Jarvis.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.FRDId = new SelectList(db.FRDs, "Id", "Name", sMSDemand.FRDId);
             ViewBag.SMSCodeId = new SelectList(db.SMSCodes, "Id", "CodeDescription", sMSDemand.SMSCodeId);
             return View(sMSDemand);
         }
@@ -98,7 +96,7 @@ namespace Jarvis.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.FRDId = new SelectList(db.FRDs, "Id", "Name", sMSDemand.FRDId);
+
             ViewBag.SMSCodeId = new SelectList(db.SMSCodes, "Id", "CodeDescription", sMSDemand.SMSCodeId);
             return View(sMSDemand);
         }

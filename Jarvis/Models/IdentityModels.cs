@@ -54,5 +54,7 @@ namespace Jarvis.Models
 
 
         public IEnumerable FRDs { get; internal set; }
+
+        public System.Data.Entity.DbSet<Jarvis.Models.SMSDemandFRD> SMSDemandFRDs { get; set; }
     }
 }

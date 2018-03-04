@@ -26,10 +26,9 @@ namespace Jarvis.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
 
-        public int FRDId { get; set; }
-        public virtual FRD FRD { get; set; }
-
         public int SMSCodeId { get; set; }
         public virtual SMSCode SMSCode { get; set; }
+
+        public virtual ICollection<SMSDemandFRD> SMSDemandFRDS { get; set; }
     }
 }

@@ -10,107 +10,116 @@ using Jarvis.Models;
 
 namespace Jarvis.Controllers
 {
-    public class SMSCodesController : Controller
+    public class SMSDemandFRDsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: SMSCodes
+        // GET: SMSDemandFRDs
         public ActionResult Index()
         {
-            return View(db.SMSCodes.ToList());
+            var sMSDemandFRDs = db.SMSDemandFRDs.Include(s => s.FRD).Include(s => s.SMSDemand);
+            return View(sMSDemandFRDs.ToList());
         }
 
-        // GET: SMSCodes/Details/5
+        // GET: SMSDemandFRDs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SMSCode sMSCode = db.SMSCodes.Find(id);
-            if (sMSCode == null)
+            SMSDemandFRD sMSDemandFRD = db.SMSDemandFRDs.Find(id);
+            if (sMSDemandFRD == null)
             {
                 return HttpNotFound();
             }
-            return View(sMSCode);
+            return View(sMSDemandFRD);
         }
 
-        // GET: SMSCodes/Create
+        // GET: SMSDemandFRDs/Create
         public ActionResult Create()
         {
+            ViewBag.FRDId = new SelectList(db.FRDS, "Id", "Name");
+            ViewBag.SMSDemandId = new SelectList(db.SMSDemands, "ID", "Sender");
             return View();
         }
 
-        // POST: SMSCodes/Create
+        // POST: SMSDemandFRDs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ReferenceCode,CodeDescription")] SMSCode sMSCode)
+        public ActionResult Create([Bind(Include = "ID,FRDId,SMSDemandId")] SMSDemandFRD sMSDemandFRD)
         {
             if (ModelState.IsValid)
             {
-                db.SMSCodes.Add(sMSCode);
+                db.SMSDemandFRDs.Add(sMSDemandFRD);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(sMSCode);
+            ViewBag.FRDId = new SelectList(db.FRDS, "Id", "Name", sMSDemandFRD.FRDId);
+            ViewBag.SMSDemandId = new SelectList(db.SMSDemands, "ID", "Sender", sMSDemandFRD.SMSDemandId);
+            return View(sMSDemandFRD);
         }
 
-        // GET: SMSCodes/Edit/5
+        // GET: SMSDemandFRDs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SMSCode sMSCode = db.SMSCodes.Find(id);
-            if (sMSCode == null)
+            SMSDemandFRD sMSDemandFRD = db.SMSDemandFRDs.Find(id);
+            if (sMSDemandFRD == null)
             {
                 return HttpNotFound();
             }
-            return View(sMSCode);
+            ViewBag.FRDId = new SelectList(db.FRDS, "Id", "Name", sMSDemandFRD.FRDId);
+            ViewBag.SMSDemandId = new SelectList(db.SMSDemands, "ID", "Sender", sMSDemandFRD.SMSDemandId);
+            return View(sMSDemandFRD);
         }
 
-        // POST: SMSCodes/Edit/5
+        // POST: SMSDemandFRDs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ReferenceCode,CodeDescription")] SMSCode sMSCode)
+        public ActionResult Edit([Bind(Include = "ID,FRDId,SMSDemandId")] SMSDemandFRD sMSDemandFRD)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sMSCode).State = EntityState.Modified;
+                db.Entry(sMSDemandFRD).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(sMSCode);
+            ViewBag.FRDId = new SelectList(db.FRDS, "Id", "Name", sMSDemandFRD.FRDId);
+            ViewBag.SMSDemandId = new SelectList(db.SMSDemands, "ID", "Sender", sMSDemandFRD.SMSDemandId);
+            return View(sMSDemandFRD);
         }
 
-        // GET: SMSCodes/Delete/5
+        // GET: SMSDemandFRDs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SMSCode sMSCode = db.SMSCodes.Find(id);
-            if (sMSCode == null)
+            SMSDemandFRD sMSDemandFRD = db.SMSDemandFRDs.Find(id);
+            if (sMSDemandFRD == null)
             {
                 return HttpNotFound();
             }
-            return View(sMSCode);
+            return View(sMSDemandFRD);
         }
 
-        // POST: SMSCodes/Delete/5
+        // POST: SMSDemandFRDs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SMSCode sMSCode = db.SMSCodes.Find(id);
-            db.SMSCodes.Remove(sMSCode);
+            SMSDemandFRD sMSDemandFRD = db.SMSDemandFRDs.Find(id);
+            db.SMSDemandFRDs.Remove(sMSDemandFRD);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

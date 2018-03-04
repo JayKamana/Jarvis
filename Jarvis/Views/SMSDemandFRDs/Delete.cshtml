@@ -1,4 +1,4 @@
-﻿@model Jarvis.Models.SMSCode
+﻿@model Jarvis.Models.SMSDemandFRD
 
 @{
     ViewBag.Title = "Delete";
@@ -8,23 +8,23 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>SMSCode</h4>
+    <h4>SMSDemandFRD</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ReferenceCode)
+            @Html.DisplayNameFor(model => model.FRD.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ReferenceCode)
+            @Html.DisplayFor(model => model.FRD.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CodeDescription)
+            @Html.DisplayNameFor(model => model.SMSDemand.Sender)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CodeDescription)
+            @Html.DisplayFor(model => model.SMSDemand.Sender)
         </dd>
 
     </dl>

@@ -11,6 +11,9 @@ namespace Jarvis.Models
         public int Id { get; set; }
 
         [Required]
+        public int ReferenceCode { get; set; }
+
+        [Required]
         public string CodeDescription { get; set; }
         public virtual ICollection<SMSDemand> SMSDemand { get; set; }
     }

@@ -219,6 +219,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SMSCodesController.cs" />
+    <Compile Include="Controllers\SMSDemandFRDsController.cs" />
     <Compile Include="Controllers\SMSDemandsController.cs" />
     <Compile Include="Dtos\FRDDtos.cs" />
     <Compile Include="Global.asax.cs">
@@ -256,6 +257,10 @@
     <Compile Include="Migrations\201803031626486_AddDateToSmsDemand.Designer.cs">
       <DependentUpon>201803031626486_AddDateToSmsDemand.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803041821435_AddSMSDemandFRDTAble.cs" />
+    <Compile Include="Migrations\201803041821435_AddSMSDemandFRDTAble.Designer.cs">
+      <DependentUpon>201803041821435_AddSMSDemandFRDTAble.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationOAuthProvider.cs" />
@@ -267,6 +272,7 @@
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\SMSCode.cs" />
     <Compile Include="Models\SMSDemand.cs" />
+    <Compile Include="Models\SMSDemandFRD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\FRDDisplayViewModel.cs" />
@@ -332,16 +338,21 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\FRD\List.cshtml" />
     <Content Include="Views\FRD\ReadOnlyList.cshtml" />
-    <Content Include="Views\SMSCodes\Create.cshtml" />
-    <Content Include="Views\SMSCodes\Delete.cshtml" />
-    <Content Include="Views\SMSCodes\Details.cshtml" />
-    <Content Include="Views\SMSCodes\Edit.cshtml" />
-    <Content Include="Views\SMSCodes\Index.cshtml" />
     <Content Include="Views\SMSDemands\Create.cshtml" />
     <Content Include="Views\SMSDemands\Delete.cshtml" />
     <Content Include="Views\SMSDemands\Details.cshtml" />
     <Content Include="Views\SMSDemands\Edit.cshtml" />
     <Content Include="Views\SMSDemands\Index.cshtml" />
+    <Content Include="Views\SMSCodes\Create.cshtml" />
+    <Content Include="Views\SMSCodes\Delete.cshtml" />
+    <Content Include="Views\SMSCodes\Details.cshtml" />
+    <Content Include="Views\SMSCodes\Edit.cshtml" />
+    <Content Include="Views\SMSCodes\Index.cshtml" />
+    <Content Include="Views\SMSDemandFRDs\Create.cshtml" />
+    <Content Include="Views\SMSDemandFRDs\Delete.cshtml" />
+    <Content Include="Views\SMSDemandFRDs\Details.cshtml" />
+    <Content Include="Views\SMSDemandFRDs\Edit.cshtml" />
+    <Content Include="Views\SMSDemandFRDs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -383,6 +394,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803031626486_AddDateToSmsDemand.resx">
       <DependentUpon>201803031626486_AddDateToSmsDemand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803041821435_AddSMSDemandFRDTAble.resx">
+      <DependentUpon>201803041821435_AddSMSDemandFRDTAble.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
