@@ -14,12 +14,13 @@ namespace Jarvis.Models
         [Required]
         public string Sender { get; set; }
 
-
+        [Display(Name ="Content TR")]
         public string Content_tr { get; set; }
 
-
+        [Display(Name = "Content ENG")]
         public string Content_en { get; set; }
 
+        [Display(Name = "Date")]
         public DateTime UpdateDate { get; set; }
 
         public string UserId { get; set; }
