@@ -261,6 +261,10 @@
     <Compile Include="Migrations\201803041821435_AddSMSDemandFRDTAble.Designer.cs">
       <DependentUpon>201803041821435_AddSMSDemandFRDTAble.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803061908570_AddCompositePrimaryKey.cs" />
+    <Compile Include="Migrations\201803061908570_AddCompositePrimaryKey.Designer.cs">
+      <DependentUpon>201803061908570_AddCompositePrimaryKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationOAuthProvider.cs" />
@@ -353,6 +357,7 @@
     <Content Include="Views\SMSDemandFRDs\Details.cshtml" />
     <Content Include="Views\SMSDemandFRDs\Edit.cshtml" />
     <Content Include="Views\SMSDemandFRDs\Index.cshtml" />
+    <Content Include="Views\FRD\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -397,6 +402,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803041821435_AddSMSDemandFRDTAble.resx">
       <DependentUpon>201803041821435_AddSMSDemandFRDTAble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803061908570_AddCompositePrimaryKey.resx">
+      <DependentUpon>201803061908570_AddCompositePrimaryKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

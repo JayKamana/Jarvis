@@ -15,10 +15,7 @@
             @Html.DisplayNameFor(model => model.FRD.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SMSDemand.SMSCode.ReferenceCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SMSDemand.SMSCode.CodeDescription)
+            @Html.DisplayNameFor(model => model.SMSDemand.Sender)
         </th>
         <th></th>
     </tr>
@@ -29,15 +26,12 @@
             @Html.DisplayFor(modelItem => item.FRD.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SMSDemand.SMSCode.ReferenceCode)
+            @Html.DisplayFor(modelItem => item.SMSDemand.Sender)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SMSDemand.SMSCode.CodeDescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }

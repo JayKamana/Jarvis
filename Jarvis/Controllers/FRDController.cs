@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Jarvis.Models;
@@ -30,6 +31,20 @@ namespace Jarvis.Controllers
                 return View("List", frds);
 
             return View("ReadOnlyList", frds);
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            FRD frd = _context.FRDS.Include(c => c.User).SingleOrDefault(f => f.Id == id);
+            if (frd == null)
+            {
+                return HttpNotFound();
+            }
+            return View(frd);
         }
 
     }

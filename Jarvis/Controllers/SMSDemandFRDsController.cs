@@ -49,7 +49,7 @@ namespace Jarvis.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FRDId,SMSDemandId")] SMSDemandFRD sMSDemandFRD)
+        public ActionResult Create([Bind(Include = "FRDId,SMSDemandId")] SMSDemandFRD sMSDemandFRD)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Jarvis.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FRDId,SMSDemandId")] SMSDemandFRD sMSDemandFRD)
+        public ActionResult Edit([Bind(Include = "FRDId,SMSDemandId")] SMSDemandFRD sMSDemandFRD)
         {
             if (ModelState.IsValid)
             {

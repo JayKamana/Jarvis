@@ -26,7 +26,7 @@ else
             {
                 <tr>
                     <td>@frd.Id</td>
-                    <td>@frd.Name</td>
+                    <td> @Html.ActionLink(@frd.Name, "Details", "FRD", new { id = frd.Id }, null) </td>
                     <td>@frd.User.UserName</td>
                     <td>
                         <button data-frd-id="@frd.Id"  class="btn-link js-delete">Delete</button>
