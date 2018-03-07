@@ -9,6 +9,11 @@ namespace Jarvis.Models
 {
     public class FRD
     {
+        public FRD()
+        {
+            this.SMSDemands = new HashSet<SMSDemand>();
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -24,6 +29,7 @@ namespace Jarvis.Models
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
 
-        public virtual ICollection<SMSDemandFRD> SMSDemandFRDS { get; set; }
+        public virtual ICollection<SMSDemand> SMSDemands { get; set; }
+
     }
 }

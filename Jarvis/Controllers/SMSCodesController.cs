@@ -41,9 +41,7 @@ namespace Jarvis.Controllers
             return View();
         }
 
-        // POST: SMSCodes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,ReferenceCode,CodeDescription")] SMSCode sMSCode)
@@ -73,9 +71,6 @@ namespace Jarvis.Controllers
             return View(sMSCode);
         }
 
-        // POST: SMSCodes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,ReferenceCode,CodeDescription")] SMSCode sMSCode)

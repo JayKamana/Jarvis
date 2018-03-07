@@ -10,7 +10,6 @@
     <h4>SMSDemand</h4>
     <hr />
     <dl class="dl-horizontal">
-
         <dt>
             @Html.DisplayNameFor(model => model.SMSCode.ReferenceCode)
         </dt>
@@ -18,7 +17,6 @@
         <dd>
             @Html.DisplayFor(model => model.SMSCode.ReferenceCode)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.SMSCode.CodeDescription)
         </dt>
@@ -49,6 +47,22 @@
 
         <dd>
             @Html.DisplayFor(model => model.Content_en)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserName)
         </dd>
 
     </dl>

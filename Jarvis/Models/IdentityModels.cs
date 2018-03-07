@@ -36,7 +36,9 @@ namespace Jarvis.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<FRD> FRDS { get; set; }
+        public DbSet<SMSDemand> SMSDemands { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<SMSCode> SMSCodes { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -48,13 +50,5 @@ namespace Jarvis.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<Jarvis.Models.SMSCode> SMSCodes { get; set; }
-
-        public System.Data.Entity.DbSet<Jarvis.Models.SMSDemand> SMSDemands { get; set; }
-
-
-        public IEnumerable FRDs { get; internal set; }
-
-        public System.Data.Entity.DbSet<Jarvis.Models.SMSDemandFRD> SMSDemandFRDs { get; set; }
     }
 }

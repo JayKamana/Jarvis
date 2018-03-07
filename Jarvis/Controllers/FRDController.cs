@@ -39,7 +39,7 @@ namespace Jarvis.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FRD frd = _context.FRDS.Include(c => c.User).SingleOrDefault(f => f.Id == id);
+            FRD frd = _context.FRDS.Include(f => f.User).SingleOrDefault(f => f.Id == id);
             if (frd == null)
             {
                 return HttpNotFound();

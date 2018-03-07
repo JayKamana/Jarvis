@@ -9,6 +9,12 @@ namespace Jarvis.Models
 {
     public class SMSDemand
     {
+
+        public SMSDemand()
+        {
+            this.FRDS = new HashSet<FRD>();
+        }
+
         public int ID { get; set; }
 
         [Required]
@@ -30,6 +36,6 @@ namespace Jarvis.Models
         public int SMSCodeId { get; set; }
         public virtual SMSCode SMSCode { get; set; }
 
-        public virtual ICollection<SMSDemandFRD> SMSDemandFRDS { get; set; }
+        public virtual ICollection<FRD> FRDS { get; set; }
     }
 }

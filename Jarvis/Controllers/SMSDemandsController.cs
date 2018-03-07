@@ -40,17 +40,13 @@ namespace Jarvis.Controllers
         // GET: SMSDemands/Create
         public ActionResult Create()
         {
-            ViewBag.FRDId = new SelectList(db.FRDS, "Id", "Name");
             ViewBag.SMSCodeId = new SelectList(db.SMSCodes, "Id", "CodeDescription");
             return View();
         }
 
-        // POST: SMSDemands/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Sender,Content_tr,Content_en,UserId,FRDId,SMSCodeId")] SMSDemand sMSDemand)
+        public ActionResult Create([Bind(Include = "ID,Sender,Content_tr,Content_en,SMSCodeId")] SMSDemand sMSDemand)
         {
             if (ModelState.IsValid)
             {
@@ -81,12 +77,9 @@ namespace Jarvis.Controllers
             return View(sMSDemand);
         }
 
-        // POST: SMSDemands/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Sender,Content_tr,Content_en,UserId,FRDId,SMSCodeId")] SMSDemand sMSDemand)
+        public ActionResult Edit([Bind(Include = "ID,Sender,Content_tr,Content_en,SMSCodeId")] SMSDemand sMSDemand)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +89,6 @@ namespace Jarvis.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             ViewBag.SMSCodeId = new SelectList(db.SMSCodes, "Id", "CodeDescription", sMSDemand.SMSCodeId);
             return View(sMSDemand);
         }
