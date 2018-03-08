@@ -8,7 +8,6 @@ namespace Jarvis.ViewModel
 {
     public class FRDDisplayViewModel
     {
-        public IEnumerable<Employee> Employees { get; set; }
         public IEnumerable<FRD> FRDS { get; set; }
     }
 }

@@ -20,11 +20,6 @@ namespace Jarvis.Models
         [StringLength(255)]
         public String Name { get; set; }
 
-        public Employee Employee { get; set; }
-
-        [Required]
-        public int EmployeeId { get; set; }
-
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }

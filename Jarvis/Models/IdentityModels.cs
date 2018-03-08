@@ -37,7 +37,6 @@ namespace Jarvis.Models
     {
         public DbSet<FRD> FRDS { get; set; }
         public DbSet<SMSDemand> SMSDemands { get; set; }
-        public DbSet<Employee> Employees { get; set; }
         public DbSet<SMSCode> SMSCodes { get; set; }
 
         public ApplicationDbContext()

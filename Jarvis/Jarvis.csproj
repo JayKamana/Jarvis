@@ -274,11 +274,18 @@
     <Compile Include="Migrations\201803070941524_AddSMSCodeDbContext.Designer.cs">
       <DependentUpon>201803070941524_AddSMSCodeDbContext.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803081741153_RemoveEmployeeForeignKey.cs" />
+    <Compile Include="Migrations\201803081741153_RemoveEmployeeForeignKey.Designer.cs">
+      <DependentUpon>201803081741153_RemoveEmployeeForeignKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803081744053_RemoveEmployeeModel.cs" />
+    <Compile Include="Migrations\201803081744053_RemoveEmployeeModel.Designer.cs">
+      <DependentUpon>201803081744053_RemoveEmployeeModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationOAuthProvider.cs" />
     <Compile Include="Models\ChallengeResult.cs" />
-    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\FRD.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -414,6 +421,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803070941524_AddSMSCodeDbContext.resx">
       <DependentUpon>201803070941524_AddSMSCodeDbContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803081741153_RemoveEmployeeForeignKey.resx">
+      <DependentUpon>201803081741153_RemoveEmployeeForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803081744053_RemoveEmployeeModel.resx">
+      <DependentUpon>201803081744053_RemoveEmployeeModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

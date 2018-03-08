@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Content_tr, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Content_tr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Content_tr, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Content_tr, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Content_en, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Content_en, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Content_en, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Content_en, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,7 +51,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input id ="save-edit" type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -62,5 +62,26 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+<script>
+
+    $(function () {
+
+        $('#save-edit').on('click', function () {
+
+            var content = $('#Content_tr').val();
+
+            var chars = {
+                'ö': 'o', 'Ö': 'O', 'ç': 'c', 'Ç': 'C', 'ş': 's', 'Ş': 'S',
+                'ı': 'i', 'I': 'I', 'ğ': 'g', 'Ğ': 'G', 'ü': 'u', 'Ü': 'U'
+            };
+
+            content = content.replace(/[öÖçÇşŞıIğĞüÜ]/g, m => chars[m]);
+
+            $('#Content_tr').val(content);
+
+        })
+
+    })
+
+</script>
 }

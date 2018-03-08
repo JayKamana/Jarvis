@@ -65,17 +65,17 @@
     $(function () {
 
         $('#form-submit').on('click', function () {
-            var content = $('#content-tr').val();
-            var returnString = content
-            //Convert Characters
-            returnString = returnString.replace(/ö/g, 'o');
-            returnString = returnString.replace(/ç/g, 'c');
-            returnString = returnString.replace(/ş/g, 's');
-            returnString = returnString.replace(/ı/g, 'i');
-            returnString = returnString.replace(/ğ/g, 'g');
-            returnString = returnString.replace(/ü/g, 'u');  
 
-            $('#content-tr').val(returnString);
+            var content = $('#Content_tr').val();
+
+            var chars = {
+                'ö': 'o', 'Ö': 'O', 'ç': 'c', 'Ç': 'C', 'ş': 's', 'Ş': 'S',
+                'ı': 'i', 'I': 'I', 'ğ': 'g', 'Ğ': 'G', 'ü': 'u', 'Ü': 'U'
+            };
+
+            content = content.replace(/[öÖçÇşŞıIğĞüÜ]/g, m => chars[m]);
+
+            $('#Content_tr').val(content);
 
         })
 
