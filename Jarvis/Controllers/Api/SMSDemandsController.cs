@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace Jarvis.Controllers.Api
 {
+    [Authorize]
     public class SMSDemandsController : ApiController
     {
         private ApplicationDbContext _context;

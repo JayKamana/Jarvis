@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.ComponentModel.DataAnnotations;
-using Jarvis.Models;
 
-namespace Jarvis.Dtos
+namespace Jarvis.Models
 {
-    public class FRDDtos
+    public class Department
     {
         public int Id { get; set; }
 
         [Required]
-        [StringLength(255)]
         public String Name { get; set; }
 
+        public virtual ICollection<ApplicationUser> User { get; set; }
     }
 }

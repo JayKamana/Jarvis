@@ -5,9 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace Jarvis.Controllers.Api
 {
+    [Authorize]
     public class SMSCodesController : ApiController
     {
         private ApplicationDbContext _context;
@@ -17,9 +19,10 @@ namespace Jarvis.Controllers.Api
             _context = new ApplicationDbContext();
         }
 
-        public IEnumerable<SMSCode> GetSMSCode()
+        [HttpGet]
+        public IHttpActionResult GetSMSCode()
         {
-            return _context.SMSCodes.ToList();
+            return Ok(_context.SMSCodes.ToList());
         }
 
         public SMSCode GetSMSCode(int id)

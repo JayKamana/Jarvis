@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -17,6 +19,10 @@ namespace Jarvis.Models
         //    // Add custom user claims here
         //    return userIdentity;
         //}
+
+
+        public int? DepartmentId { get; set; }
+        public virtual Department Department { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -38,6 +44,7 @@ namespace Jarvis.Models
         public DbSet<FRD> FRDS { get; set; }
         public DbSet<SMSDemand> SMSDemands { get; set; }
         public DbSet<SMSCode> SMSCodes { get; set; }
+        public DbSet<Department> Departments { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

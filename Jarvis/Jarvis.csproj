@@ -282,10 +282,47 @@
     <Compile Include="Migrations\201803081744053_RemoveEmployeeModel.Designer.cs">
       <DependentUpon>201803081744053_RemoveEmployeeModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803121800347_AddDepartmentTable.cs" />
+    <Compile Include="Migrations\201803121800347_AddDepartmentTable.Designer.cs">
+      <DependentUpon>201803121800347_AddDepartmentTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121803000_AddDepartmentsTable.cs" />
+    <Compile Include="Migrations\201803121803000_AddDepartmentsTable.Designer.cs">
+      <DependentUpon>201803121803000_AddDepartmentsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121839431_EditDepartmentsTable.cs" />
+    <Compile Include="Migrations\201803121839431_EditDepartmentsTable.Designer.cs">
+      <DependentUpon>201803121839431_EditDepartmentsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121841196_AddDepartmentIdForeignKeyToUsers.cs" />
+    <Compile Include="Migrations\201803121841196_AddDepartmentIdForeignKeyToUsers.Designer.cs">
+      <DependentUpon>201803121841196_AddDepartmentIdForeignKeyToUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121859334_AddDepartmentIdForeignKeyToASPUsers.cs" />
+    <Compile Include="Migrations\201803121859334_AddDepartmentIdForeignKeyToASPUsers.Designer.cs">
+      <DependentUpon>201803121859334_AddDepartmentIdForeignKeyToASPUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121901137_AddDepartmentIdForeignKeyToASPUser.cs" />
+    <Compile Include="Migrations\201803121901137_AddDepartmentIdForeignKeyToASPUser.Designer.cs">
+      <DependentUpon>201803121901137_AddDepartmentIdForeignKeyToASPUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121904103_DeleteDepartmentsDatabase.cs" />
+    <Compile Include="Migrations\201803121904103_DeleteDepartmentsDatabase.Designer.cs">
+      <DependentUpon>201803121904103_DeleteDepartmentsDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121912513_ReImlplementDepartmentTable.cs" />
+    <Compile Include="Migrations\201803121912513_ReImlplementDepartmentTable.Designer.cs">
+      <DependentUpon>201803121912513_ReImlplementDepartmentTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803122020188_AddForeignKeyDepartmentID.cs" />
+    <Compile Include="Migrations\201803122020188_AddForeignKeyDepartmentID.Designer.cs">
+      <DependentUpon>201803122020188_AddForeignKeyDepartmentID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationOAuthProvider.cs" />
     <Compile Include="Models\ChallengeResult.cs" />
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\FRD.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -427,6 +464,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803081744053_RemoveEmployeeModel.resx">
       <DependentUpon>201803081744053_RemoveEmployeeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121800347_AddDepartmentTable.resx">
+      <DependentUpon>201803121800347_AddDepartmentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121803000_AddDepartmentsTable.resx">
+      <DependentUpon>201803121803000_AddDepartmentsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121839431_EditDepartmentsTable.resx">
+      <DependentUpon>201803121839431_EditDepartmentsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121841196_AddDepartmentIdForeignKeyToUsers.resx">
+      <DependentUpon>201803121841196_AddDepartmentIdForeignKeyToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121859334_AddDepartmentIdForeignKeyToASPUsers.resx">
+      <DependentUpon>201803121859334_AddDepartmentIdForeignKeyToASPUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121901137_AddDepartmentIdForeignKeyToASPUser.resx">
+      <DependentUpon>201803121901137_AddDepartmentIdForeignKeyToASPUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121904103_DeleteDepartmentsDatabase.resx">
+      <DependentUpon>201803121904103_DeleteDepartmentsDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121912513_ReImlplementDepartmentTable.resx">
+      <DependentUpon>201803121912513_ReImlplementDepartmentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803122020188_AddForeignKeyDepartmentID.resx">
+      <DependentUpon>201803122020188_AddForeignKeyDepartmentID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -10,10 +10,11 @@ using Jarvis.Dtos;
 using AutoMapper;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
-
+using System.Data.Entity;
+    
 namespace Jarvis.Controllers.Api
 {
-   // [Authorize]
+    [Authorize]
     public class FrdsController : ApiController
     {
         private ApplicationDbContext _context;
@@ -23,10 +24,17 @@ namespace Jarvis.Controllers.Api
             _context = new ApplicationDbContext();
         }
 
-        [HttpGet]
+        //[HttpGet]
+        //public IHttpActionResult GetFRD()
+        //{
+        //    return Ok(_context.FRDS.ToList());
+        //}
+
         public IHttpActionResult GetFRD()
         {
-            return Ok(_context.FRDS.ToList());
+            var frdDtos = _context.FRDS.Include(c => c.User).ToList().Select(Mapper.Map<FRD, FRDDtos>);
+
+            return Ok(frdDtos);
         }
 
         //GET /api/frds
@@ -40,7 +48,8 @@ namespace Jarvis.Controllers.Api
         //      return Ok(frd);
         //     }
 
-      //  GET /api/frds/1
+
+        //  GET /api/frds/1
         [HttpGet]
         public IHttpActionResult GetFRD(int id)
         {
@@ -53,55 +62,56 @@ namespace Jarvis.Controllers.Api
         }
 
         //POST /api/frds
-        //[HttpPost]
-        //public IHttpActionResult CreateFRD(FRDDtos frdDto)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest();
+        [HttpPost]
+        public IHttpActionResult CreateFRD(FRDDtos frdDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
 
-        //    var frd = Mapper.Map<FRDDtos, FRD>(frdDto);
-        //    _context.FRDS.Add(frd);
-        //    _context.SaveChanges();
+            var frd = Mapper.Map<FRDDtos, FRD>(frdDto);
+            frd.UserId = User.Identity.GetUserId();
+            _context.FRDS.Add(frd);
+            _context.SaveChanges();
 
-        //    frdDto.Id = frd.Id;
-        //    return Created(new Uri(Request.RequestUri + "/" + frd.Id), frdDto);
-        //}
+            frdDto.Id = frd.Id;
+            return Created(new Uri(Request.RequestUri + "/" + frd.Id), frdDto);
+        }
 
         //PUT  /api/frds/1
-        //[HttpPut]
-        //public IHttpActionResult UpdateCustomer(int id, FRDDtos frdDto)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest();
+        [HttpPut]
+        public IHttpActionResult UpdateCustomer(int id, FRDDtos frdDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
 
-        //    var frdInDb = _context.FRDS.SingleOrDefault(c => c.Id == id);
+            var frdInDb = _context.FRDS.SingleOrDefault(c => c.Id == id);
 
-        //    if (frdInDb == null)
-        //        return NotFound();
+            if (frdInDb == null)
+                return NotFound();
 
-        //    Mapper.Map(frdDto, frdInDb);
+            Mapper.Map(frdDto, frdInDb);
 
-        //    _context.SaveChanges();
+            _context.SaveChanges();
 
-        //    return Ok();
+            return Ok();
 
-        //}
+        }
 
         //DELETE    /api/frds/1
-        //[Authorize(Roles = RoleName.CanManageFRD)]
-        //[HttpDelete]
-        //public IHttpActionResult DeleteCustomer(int id)
-        //{
-        //    var frdInDb = _context.FRDS.SingleOrDefault(c => c.Id == id);
+        [Authorize(Roles = RoleName.CanManageFRD)]
+        [HttpDelete]
+        public IHttpActionResult DeleteCustomer(int id)
+        {
+            var frdInDb = _context.FRDS.SingleOrDefault(c => c.Id == id);
 
-        //    if (frdInDb == null)
-        //        return NotFound();
+            if (frdInDb == null)
+                return NotFound();
 
-        //    _context.FRDS.Remove(frdInDb);
-        //    _context.SaveChanges();
+            _context.FRDS.Remove(frdInDb);
+            _context.SaveChanges();
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
 
 
     }
