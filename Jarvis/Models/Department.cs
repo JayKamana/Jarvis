@@ -13,6 +13,9 @@ namespace Jarvis.Models
         [Required]
         public String Name { get; set; }
 
+        public int ManagerId { get; set; }
+        public virtual Manager Manager { get; set; }
+
         public virtual ICollection<ApplicationUser> User { get; set; }
     }
 }

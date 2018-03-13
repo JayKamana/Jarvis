@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Jarvis.Models;
@@ -45,6 +47,58 @@ namespace Jarvis.Controllers
                 return HttpNotFound();
             }
             return View(frd);
+        }
+
+        public ActionResult Approve(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            FRD frd = _context.FRDS.Include(f => f.User).Include(d => d.User.Department).Include(m => m.User.Department.Manager).SingleOrDefault(f => f.Id == id);
+            if (frd == null)
+            {
+                return HttpNotFound();
+            }
+            return View(frd);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Approve(FRDApproveMessage model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var body = "<p>Request For FRD Approval</p><p>Message:</p><p>{0}</p><p><a href='https://localhost:44391/frd'>Confirm FRD</a></p>";
+                var message = new MailMessage();
+                message.To.Add(new MailAddress("kamanajames@yahoo.com"));  // replace with valid value 
+                message.From = new MailAddress("jaykamana@gmail.com");  // replace with valid value
+                message.Subject = "Your email subject";
+                message.Body = string.Format(body, model.Message);
+                message.IsBodyHtml = true;
+
+                using (var smtp = new SmtpClient())
+                {
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "jaykamana@gmail.com",  // replace with valid value
+                        Password = "eb46KgWAXrnC"  // replace with valid value
+                    };
+                    smtp.Credentials = credential;
+                    smtp.Host = "smtp-mail.outlook.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    await smtp.SendMailAsync(message);
+                    return RedirectToAction("Sent");
+                }
+            }
+            return View(model);
+        }
+
+        public ActionResult Sent()
+        {
+            return View();
         }
 
     }
