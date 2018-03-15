@@ -29,7 +29,9 @@ namespace Jarvis.Controllers
         public ActionResult Index()
         {
             var frds = _context.FRDS.Include(c => c.User).ToList();
-            if(User.IsInRole(RoleName.CanManageFRD))
+
+
+            if (User.IsInRole(RoleName.CanManageFRD))
                 return View("List", frds);
 
             return View("ReadOnlyList", frds);
@@ -66,16 +68,21 @@ namespace Jarvis.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Approve(FRDApproveMessage model)
+        //public async Task<ActionResult> ApproveAsync(FRD model)
         {
             if (ModelState.IsValid)
             {
+                //var frdid = model.Id;
+                //var managerid = model.User.Department.ManagerId;
 
-                var body = "<p>Request For FRD Approval</p><p>Message:</p><p>{0}</p><p><a href='https://localhost:44391/frd'>Confirm FRD</a></p>";
+                var body = "<h3>Request For FRD Approval</h3><p>The FRD " + model.FrdName + " by " + model.DemandOwnerEmail + " is currently awaiting your approval</p><p><a href='https://localhost:44391/frd/confirm/" + model.FrdId + "'>View FRD</a></p>";
                 var message = new MailMessage();
-                message.To.Add(new MailAddress("kamanajames@yahoo.com"));  // replace with valid value 
+                message.To.Add(new MailAddress(model.ManagerEmail));  // replace with valid value
+                                                                      // message.To.Add(new MailAddress("{}"));
                 message.From = new MailAddress("jaykamana@gmail.com");  // replace with valid value
+                //message.From = new MailAddress("jaykamana@gmail.com");
                 message.Subject = "Your email subject";
-                message.Body = string.Format(body, model.Message);
+                message.Body = string.Format(body, model.Message, model.FrdId, model.DemandOwnerEmail, model.FrdName, model.ManagerEmail);
                 message.IsBodyHtml = true;
 
                 using (var smtp = new SmtpClient())
@@ -99,6 +106,37 @@ namespace Jarvis.Controllers
         public ActionResult Sent()
         {
             return View();
+        }
+
+        public ActionResult Confirm(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            FRD frd = _context.FRDS.Find(id);
+            if (frd == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return View(frd);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Confirm([Bind(Include = "Id,Name,UserId")] FRD frd)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                _context.Entry(frd).State = EntityState.Modified;
+                frd.isApproved = true;
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(frd);
         }
 
     }

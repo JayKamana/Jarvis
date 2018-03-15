@@ -6,45 +6,27 @@
 <h2>Approve FRD</h2>
 
 <div>
-    <hr />
-    @*<dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.User.UserName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.User.UserName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.User.Department.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.User.Department.Name)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.User.Department.Manager.Id)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.User.Department.Manager.Id)
-            </dd>
-        </dl>*@
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         <h4>Addition Message.</h4>
-        <hr />       
+        <hr />
+
+        <input type="hidden" id="FrdId" name="FrdId" value="@Model.Id" />
+
+        <input type="hidden" id="DemandOwnerEmail" name="DemandOwnerEmail" value="@Model.User.Email" />
+
+        <input type="hidden" id="FrdName" name="FrdName" value="@Model.Name" />
+
+        <div class="form-group">
+            @Html.Label("ManagerEmail", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBox("ManagerEmail", new { @class = "form-control" })
+                @Html.ValidationMessage("ManagerEmail")
+            </div>
+        </div>
+
         <div class="form-group">
             @Html.Label("Message", new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
@@ -52,11 +34,13 @@
                 @Html.ValidationMessage("Message")
             </div>
         </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" class="btn btn-default" value="Send" />
             </div>
         </div>
+
     }
 
     @section Scripts {
@@ -66,9 +50,4 @@
 
 </div>
 
-@*<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
 
-@*<p>@Html.ActionLink("Approve","Sent", "Frd")</p>*@

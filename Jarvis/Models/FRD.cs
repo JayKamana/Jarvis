@@ -20,6 +20,9 @@ namespace Jarvis.Models
         [StringLength(255)]
         public String Name { get; set; }
 
+        [Display(Name ="Approved")]
+        public bool? isApproved { get; set; }
+
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
