@@ -19,13 +19,7 @@
 
         <input type="hidden" id="FrdName" name="FrdName" value="@Model.Name" />
 
-        <div class="form-group">
-            @Html.Label("ManagerEmail", new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBox("ManagerEmail", new { @class = "form-control" })
-                @Html.ValidationMessage("ManagerEmail")
-            </div>
-        </div>
+        <input type="hidden" id="ManagerID" name="ManagerID" value="@Model.User.Department.Manager.UserId" />
 
         <div class="form-group">
             @Html.Label("Message", new { @class = "col-md-2 control-label" })

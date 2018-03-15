@@ -45,6 +45,7 @@ namespace Jarvis.Models
         public DbSet<SMSDemand> SMSDemands { get; set; }
         public DbSet<SMSCode> SMSCodes { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet <Manager> Managers { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

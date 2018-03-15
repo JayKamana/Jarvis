@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Jarvis.Models;
 using Jarvis.ViewModel;
+using Microsoft.AspNet.Identity;
 
 namespace Jarvis.Controllers
 {
@@ -53,6 +54,7 @@ namespace Jarvis.Controllers
 
         public ActionResult Approve(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -62,35 +64,37 @@ namespace Jarvis.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(frd);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Approve(FRDApproveMessage model)
-        //public async Task<ActionResult> ApproveAsync(FRD model)
         {
             if (ModelState.IsValid)
             {
-                //var frdid = model.Id;
-                //var managerid = model.User.Department.ManagerId;
 
-                var body = "<h3>Request For FRD Approval</h3><p>The FRD " + model.FrdName + " by " + model.DemandOwnerEmail + " is currently awaiting your approval</p><p><a href='https://localhost:44391/frd/confirm/" + model.FrdId + "'>View FRD</a></p>";
-                var message = new MailMessage();
-                message.To.Add(new MailAddress(model.ManagerEmail));  // replace with valid value
-                                                                      // message.To.Add(new MailAddress("{}"));
-                message.From = new MailAddress("jaykamana@gmail.com");  // replace with valid value
-                //message.From = new MailAddress("jaykamana@gmail.com");
-                message.Subject = "Your email subject";
-                message.Body = string.Format(body, model.Message, model.FrdId, model.DemandOwnerEmail, model.FrdName, model.ManagerEmail);
+                var ManagerEmail = _context.Users.FirstOrDefault(u => u.Id == model.ManagerID).Email;
+
+                var body = "<h3>Request For FRD Approval</h3><p>The FRD <strong>" + model.FrdName + "</strong> by <strong>" + model.DemandOwnerEmail + "</strong> is currently awaiting your approval</p><p><a href='https://localhost:44391/frd/confirm/" + model.FrdId + "'>View FRD</a></p>";
+                var message = new MailMessage();  
+                message.To.Add(new MailAddress(ManagerEmail));
+
+                message.From = new MailAddress("jaykamana@gmail.com");  
+  
+                message.Subject = "FRD Approval";
+                message.Body = string.Format(body, model.Message, model.FrdId, model.DemandOwnerEmail, model.FrdName, model.ManagerID);
                 message.IsBodyHtml = true;
+                message.BodyEncoding = System.Text.Encoding.UTF8;
+                message.SubjectEncoding = System.Text.Encoding.Default;
 
                 using (var smtp = new SmtpClient())
                 {
                     var credential = new NetworkCredential
                     {
-                        UserName = "jaykamana@gmail.com",  // replace with valid value
-                        Password = "eb46KgWAXrnC"  // replace with valid value
+                        UserName = "jaykamana@gmail.com",  
+                        Password = "eb46KgWAXrnC"  
                     };
                     smtp.Credentials = credential;
                     smtp.Host = "smtp-mail.outlook.com";
@@ -114,7 +118,8 @@ namespace Jarvis.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FRD frd = _context.FRDS.Find(id);
+
+            FRD frd = _context.FRDS.Include(f => f.User).SingleOrDefault(f => f.Id == id);
             if (frd == null)
             {
                 return HttpNotFound();
@@ -125,13 +130,12 @@ namespace Jarvis.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Confirm([Bind(Include = "Id,Name,UserId")] FRD frd)
+        public ActionResult Confirm([Bind(Include = "Id,Name,UserId,isApproved")] FRD frd)
         {
             
             if (ModelState.IsValid)
             {
                 _context.Entry(frd).State = EntityState.Modified;
-                frd.isApproved = true;
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }

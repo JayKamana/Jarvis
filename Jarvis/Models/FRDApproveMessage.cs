@@ -11,6 +11,6 @@ namespace Jarvis.Models
         public int FrdId { get; set; }
         public string FrdName { get; set; }
         public string DemandOwnerEmail { get; set; }
-        public string ManagerEmail { get; set; }
+        public string ManagerID { get; set; }
     }
 }
