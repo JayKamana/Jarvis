@@ -81,7 +81,7 @@ namespace Jarvis.Controllers
                 var message = new MailMessage();  
                 message.To.Add(new MailAddress(ManagerEmail));
 
-                message.From = new MailAddress("jaykamana@gmail.com");  
+                message.From = new MailAddress("cmpe406gradproject@outlook.com");  
   
                 message.Subject = "FRD Approval";
                 message.Body = string.Format(body, model.Message, model.FrdId, model.DemandOwnerEmail, model.FrdName, model.ManagerID);
@@ -93,8 +93,8 @@ namespace Jarvis.Controllers
                 {
                     var credential = new NetworkCredential
                     {
-                        UserName = "jaykamana@gmail.com",  
-                        Password = "eb46KgWAXrnC"  
+                        UserName = "cmpe406gradproject@outlook.com",  
+                        Password = "c05L!vyCwKBL"
                     };
                     smtp.Credentials = credential;
                     smtp.Host = "smtp-mail.outlook.com";
