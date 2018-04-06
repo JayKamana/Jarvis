@@ -326,6 +326,14 @@
     <Compile Include="Migrations\201803151003537_AddIsApprovedToFRD.Designer.cs">
       <DependentUpon>201803151003537_AddIsApprovedToFRD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804061250287_AddCreationDateToFrd.cs" />
+    <Compile Include="Migrations\201804061250287_AddCreationDateToFrd.Designer.cs">
+      <DependentUpon>201804061250287_AddCreationDateToFrd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804061308051_AddReferenceNumberToFrd.cs" />
+    <Compile Include="Migrations\201804061308051_AddReferenceNumberToFrd.Designer.cs">
+      <DependentUpon>201804061308051_AddReferenceNumberToFrd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationOAuthProvider.cs" />
@@ -418,6 +426,7 @@
     <Content Include="Views\FRD\Approve.cshtml" />
     <Content Include="Views\FRD\Sent.cshtml" />
     <Content Include="Views\FRD\Confirm.cshtml" />
+    <Content Include="Views\FRD\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -510,6 +519,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803151003537_AddIsApprovedToFRD.resx">
       <DependentUpon>201803151003537_AddIsApprovedToFRD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804061250287_AddCreationDateToFrd.resx">
+      <DependentUpon>201804061250287_AddCreationDateToFrd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804061308051_AddReferenceNumberToFrd.resx">
+      <DependentUpon>201804061308051_AddReferenceNumberToFrd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

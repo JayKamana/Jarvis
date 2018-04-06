@@ -52,6 +52,28 @@ namespace Jarvis.Controllers
             return View(frd);
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,ReferenceNumber,Name,CreationDate,UserId,isApproved")] FRD fRD)
+        {
+            if (ModelState.IsValid)
+            {
+                fRD.CreationDate = DateTime.Now;
+                fRD.isApproved = false;
+                fRD.UserId = User.Identity.GetUserId();
+                _context.FRDS.Add(fRD);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(fRD);
+        }
+
         public ActionResult Approve(int? id)
         {
 

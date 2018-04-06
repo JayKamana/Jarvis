@@ -3,29 +3,36 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
 <div>
-    <h4>FRD</h4>
+
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+    <h2 class="text-center">Kibris Turkcell</h2>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.User.UserName)
-        </dt>
+    <table class="table table-bordered table-hover">
 
-        <dd>
-            @Html.DisplayFor(model => model.User.UserName)
-        </dd>
-
-    </dl>
+        <tr>
+            <th>FRD Number</th>
+            <td>@Model.ReferenceNumber</td>
+        </tr>
+        <tr>
+            <th>Package Name</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th>Date Created</th>
+            <td>@Model.CreationDate.ToLongDateString()</td>
+        </tr>
+        <tr>
+            <th>Demand Owner</th>
+            <td>@Model.User.Email</td>
+        </tr>
+        <tr>
+            <th>Approved</th>
+            <td>@Model.isApproved</td>
+        </tr>
+    </table>
 </div>
 
 <p>
