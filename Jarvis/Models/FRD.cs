@@ -12,6 +12,8 @@ namespace Jarvis.Models
         public FRD()
         {
             this.SMSDemands = new HashSet<SMSDemand>();
+            this.Channels = new HashSet<Channel>();
+            this.TargetAudiences = new HashSet<TargetAudience>();
         }
 
         public int Id { get; set; }
@@ -34,6 +36,7 @@ namespace Jarvis.Models
         public ApplicationUser User { get; set; }
 
         public virtual ICollection<SMSDemand> SMSDemands { get; set; }
-
+        public virtual ICollection<TargetAudience> TargetAudiences { get; set; }
+        public virtual ICollection<Channel> Channels { get; set; }
     }
 }

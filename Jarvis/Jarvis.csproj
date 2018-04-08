@@ -217,11 +217,13 @@
     <Compile Include="Controllers\Api\SMSCodesController.cs" />
     <Compile Include="Controllers\Api\SMSDemandsController.cs" />
     <Compile Include="Controllers\Api\TestController.cs" />
+    <Compile Include="Controllers\ChannelsController.cs" />
     <Compile Include="Controllers\FRDController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SMSCodesController.cs" />
     <Compile Include="Controllers\SMSDemandsController.cs" />
+    <Compile Include="Controllers\TargetAudiencesController.cs" />
     <Compile Include="Dtos\FRDDtos.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -334,10 +336,15 @@
     <Compile Include="Migrations\201804061308051_AddReferenceNumberToFrd.Designer.cs">
       <DependentUpon>201804061308051_AddReferenceNumberToFrd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804071109026_AddTargetAudienceAndChannels.cs" />
+    <Compile Include="Migrations\201804071109026_AddTargetAudienceAndChannels.Designer.cs">
+      <DependentUpon>201804071109026_AddTargetAudienceAndChannels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationOAuthProvider.cs" />
     <Compile Include="Models\ChallengeResult.cs" />
+    <Compile Include="Models\Channel.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\FRD.cs" />
     <Compile Include="Models\FRDApproveMessage.cs" />
@@ -347,8 +354,10 @@
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\SMSCode.cs" />
     <Compile Include="Models\SMSDemand.cs" />
+    <Compile Include="Models\TargetAudience.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\FRDDetailsViewModel.cs" />
     <Compile Include="ViewModel\FRDDisplayViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -427,6 +436,16 @@
     <Content Include="Views\FRD\Sent.cshtml" />
     <Content Include="Views\FRD\Confirm.cshtml" />
     <Content Include="Views\FRD\Create.cshtml" />
+    <Content Include="Views\TargetAudiences\Create.cshtml" />
+    <Content Include="Views\TargetAudiences\Delete.cshtml" />
+    <Content Include="Views\TargetAudiences\Details.cshtml" />
+    <Content Include="Views\TargetAudiences\Edit.cshtml" />
+    <Content Include="Views\TargetAudiences\Index.cshtml" />
+    <Content Include="Views\Channels\Create.cshtml" />
+    <Content Include="Views\Channels\Delete.cshtml" />
+    <Content Include="Views\Channels\Details.cshtml" />
+    <Content Include="Views\Channels\Edit.cshtml" />
+    <Content Include="Views\Channels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -525,6 +544,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804061308051_AddReferenceNumberToFrd.resx">
       <DependentUpon>201804061308051_AddReferenceNumberToFrd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804071109026_AddTargetAudienceAndChannels.resx">
+      <DependentUpon>201804071109026_AddTargetAudienceAndChannels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -29,13 +29,16 @@ namespace Jarvis.Controllers
 
         public ActionResult Index()
         {
+            var userId = User.Identity.GetUserId();
+
             var frds = _context.FRDS.Include(c => c.User).ToList();
 
+            var userFrds = _context.FRDS.Where(f => f.UserId == userId).Include(c => c.User);
 
             if (User.IsInRole(RoleName.CanManageFRD))
                 return View("List", frds);
 
-            return View("ReadOnlyList", frds);
+            return View("ReadOnlyList", userFrds);
         }
 
         public ActionResult Details(int? id)
@@ -44,13 +47,16 @@ namespace Jarvis.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FRD frd = _context.FRDS.Include(f => f.User).SingleOrDefault(f => f.Id == id);
+
+            FRD frd = _context.FRDS.Include(f => f.User).Include(f => f.Channels).Include(f => f.TargetAudiences).SingleOrDefault(f => f.Id == id);
             if (frd == null)
             {
                 return HttpNotFound();
             }
             return View(frd);
         }
+
+
 
         public ActionResult Create()
         {
@@ -96,6 +102,10 @@ namespace Jarvis.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = User.Identity.GetUserId();
+
+                if (userId != model.UserId)
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
 
                 var ManagerEmail = _context.Users.FirstOrDefault(u => u.Id == model.ManagerID).Email;
 
@@ -106,7 +116,7 @@ namespace Jarvis.Controllers
                 message.From = new MailAddress("cmpe406gradproject@outlook.com");  
   
                 message.Subject = "FRD Approval";
-                message.Body = string.Format(body, model.Message, model.FrdId, model.DemandOwnerEmail, model.FrdName, model.ManagerID);
+                message.Body = string.Format(body, model.FrdId, model.DemandOwnerEmail, model.FrdName, model.ManagerID);
                 message.IsBodyHtml = true;
                 message.BodyEncoding = System.Text.Encoding.UTF8;
                 message.SubjectEncoding = System.Text.Encoding.Default;
@@ -152,7 +162,7 @@ namespace Jarvis.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Confirm([Bind(Include = "Id,Name,UserId,isApproved")] FRD frd)
+        public ActionResult Confirm([Bind(Include = "id,Name,ReferenceNumber,CreationDate,UserId,isApproved")] FRD frd)
         {
             
             if (ModelState.IsValid)

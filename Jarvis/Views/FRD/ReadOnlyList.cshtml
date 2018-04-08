@@ -24,12 +24,12 @@ else
         <tbody>
             @foreach (var frd in Model)
             {
-                <tr>
-                    <td>@frd.Id</td>
-                    <td>@frd.Name</td>
-                    <td>@frd.User.UserName</td>
-                    <td>@frd.isApproved</td>
-</tr>
+            <tr>
+                <td>@frd.ReferenceNumber</td>
+                <td> @Html.ActionLink(@frd.Name, "Details", "FRD", new { id = frd.Id }, null) </td>
+                <td>@frd.User.UserName</td>
+                <td>@frd.isApproved</td>
+            </tr>
             }
         </tbody>
     </table>

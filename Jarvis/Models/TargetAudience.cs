@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace Jarvis.Models
+{
+    public class TargetAudience
+    {
+        public TargetAudience()
+        {
+            this.FRDS = new HashSet<FRD>();
+        }
+
+        public int Id { get; set; }
+
+        [Required]
+        public String Name { get; set; }
+
+        public virtual ICollection<FRD> FRDS { get; set; }
+    }
+}
