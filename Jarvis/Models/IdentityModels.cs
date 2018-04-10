@@ -48,6 +48,7 @@ namespace Jarvis.Models
         public DbSet <Manager> Managers { get; set; }
         public DbSet<TargetAudience> TargetAudiences { get; set; }
         public DbSet<Channel> Channels { get; set; }
+        public DbSet<DistributionList> DistributionLists { get; set; }
         
 
         public ApplicationDbContext()

@@ -152,6 +152,7 @@ namespace Jarvis.Controllers
             }
 
             FRD frd = _context.FRDS.Include(f => f.User).SingleOrDefault(f => f.Id == id);
+
             if (frd == null)
             {
                 return HttpNotFound();
@@ -162,13 +163,48 @@ namespace Jarvis.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Confirm([Bind(Include = "id,Name,ReferenceNumber,CreationDate,UserId,isApproved")] FRD frd)
+        public async Task<ActionResult> ConfirmAsync([Bind(Include = "id,Name,ReferenceNumber,CreationDate,UserId,isApproved")] FRD frd)
         {
             
             if (ModelState.IsValid)
             {
                 _context.Entry(frd).State = EntityState.Modified;
                 _context.SaveChanges();
+
+                var distributionList = _context.DistributionLists.Include(d => d.User).ToList();
+
+
+                foreach (var member in distributionList)
+                {
+                    var memberEmail = member.User.Email;
+
+                    var body = "<h3>Request For FRD Approval</h3><p>The FRD <strong> " + frd.Name + "</strong> is currently awaiting your approval</p>";
+                    var message = new MailMessage();
+                    message.To.Add(new MailAddress(memberEmail));
+
+                    message.From = new MailAddress("cmpe406gradproject@outlook.com");
+
+                    message.Subject = "FRD Approval";
+                    message.Body = string.Format(body);
+                    message.IsBodyHtml = true;
+                    message.BodyEncoding = System.Text.Encoding.UTF8;
+                    message.SubjectEncoding = System.Text.Encoding.Default;
+
+                    using (var smtp = new SmtpClient())
+                    {
+                        var credential = new NetworkCredential
+                        {
+                            UserName = "cmpe406gradproject@outlook.com",
+                            Password = "c05L!vyCwKBL"
+                        };
+                        smtp.Credentials = credential;
+                        smtp.Host = "smtp-mail.outlook.com";
+                        smtp.Port = 587;
+                        smtp.EnableSsl = true;
+                        await smtp.SendMailAsync(message);
+                    }
+                }
+
                 return RedirectToAction("Index");
             }
 
