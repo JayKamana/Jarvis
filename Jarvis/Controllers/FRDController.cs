@@ -163,12 +163,27 @@ namespace Jarvis.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ConfirmAsync([Bind(Include = "id,Name,ReferenceNumber,CreationDate,UserId,isApproved")] FRD frd)
+        public async Task<ActionResult> Confirm([Bind(Include = "id,Name,ReferenceNumber,CreationDate,UserId,isApproved")] FRD frd)
         {
             
             if (ModelState.IsValid)
             {
                 _context.Entry(frd).State = EntityState.Modified;
+                _context.SaveChanges();
+
+                var units = _context.Departments.Where(d => d.CanApproveFRD == true);
+
+
+                foreach (var unit in units)
+                {
+                    UnitApproval newUnit = new UnitApproval();
+
+                    newUnit.DepartmentId = unit.Id;
+                    newUnit.FRDId = frd.Id;
+
+                    _context.UnitApprovals.Add(newUnit);
+                }
+
                 _context.SaveChanges();
 
                 var distributionList = _context.DistributionLists.Include(d => d.User).ToList();

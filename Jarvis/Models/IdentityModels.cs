@@ -49,7 +49,7 @@ namespace Jarvis.Models
         public DbSet<TargetAudience> TargetAudiences { get; set; }
         public DbSet<Channel> Channels { get; set; }
         public DbSet<DistributionList> DistributionLists { get; set; }
-        
+        public DbSet<UnitApproval> UnitApprovals { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

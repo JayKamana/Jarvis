@@ -33,22 +33,26 @@
             <td>@Model.isApproved</td>
         </tr>
     </table>
-    @using (Html.BeginForm("Approve", "FRD"))
+    @if (Model.isApproved == false)
     {
-        @Html.AntiForgeryToken()
+        using (Html.BeginForm("Approve", "FRD"))
+        {
+            @Html.AntiForgeryToken()
 
-        <input type="hidden" id="FrdId" name="FrdId" value="@Model.Id" />
+            <input type="hidden" id="FrdId" name="FrdId" value="@Model.Id" />
 
-        <input type="hidden" id="DemandOwnerEmail" name="DemandOwnerEmail" value="@Model.User.Email" />
+            <input type="hidden" id="DemandOwnerEmail" name="DemandOwnerEmail" value="@Model.User.Email" />
 
-        <input type="hidden" id="UserId" name="UserId" value="@Model.UserId" />
+            <input type="hidden" id="UserId" name="UserId" value="@Model.UserId" />
 
-        <input type="hidden" id="FrdName" name="FrdName" value="@Model.Name" />
+            <input type="hidden" id="FrdName" name="FrdName" value="@Model.Name" />
 
-        <input type="hidden" id="ManagerID" name="ManagerID" value="@Model.User.Department.Manager.UserId" />
+            <input type="hidden" id="ManagerID" name="ManagerID" value="@Model.User.Department.Manager.UserId" />
 
-        <button type="submit" class="btn btn-primary">Approve</button>
+            <button type="submit" class="btn btn-primary">Approve</button>
+        }
     }
+
 </div>
 
 <p>

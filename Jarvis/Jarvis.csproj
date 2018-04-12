@@ -344,6 +344,14 @@
     <Compile Include="Migrations\201804101950262_AddDistributionListsTable.Designer.cs">
       <DependentUpon>201804101950262_AddDistributionListsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804121023085_AddUnitApprovalsTable.cs" />
+    <Compile Include="Migrations\201804121023085_AddUnitApprovalsTable.Designer.cs">
+      <DependentUpon>201804121023085_AddUnitApprovalsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804121025270_AddUnitApprovalsDatabaseTable.cs" />
+    <Compile Include="Migrations\201804121025270_AddUnitApprovalsDatabaseTable.Designer.cs">
+      <DependentUpon>201804121025270_AddUnitApprovalsDatabaseTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationOAuthProvider.cs" />
@@ -360,6 +368,7 @@
     <Compile Include="Models\SMSCode.cs" />
     <Compile Include="Models\SMSDemand.cs" />
     <Compile Include="Models\TargetAudience.cs" />
+    <Compile Include="Models\UnitApproval.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\FRDDetailsViewModel.cs" />
@@ -555,6 +564,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804101950262_AddDistributionListsTable.resx">
       <DependentUpon>201804101950262_AddDistributionListsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804121023085_AddUnitApprovalsTable.resx">
+      <DependentUpon>201804121023085_AddUnitApprovalsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804121025270_AddUnitApprovalsDatabaseTable.resx">
+      <DependentUpon>201804121025270_AddUnitApprovalsDatabaseTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
