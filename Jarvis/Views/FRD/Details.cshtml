@@ -1,4 +1,4 @@
-﻿@model Jarvis.Models.FRD
+﻿@model Jarvis.ViewModel.FRDDetailsViewModel
 @{
     ViewBag.Title = "Details";
 }
@@ -14,48 +14,71 @@
 
         <tr>
             <th>FRD Number</th>
-            <td>@Model.ReferenceNumber</td>
+            <td>@Model.FRDS.ReferenceNumber</td>
         </tr>
         <tr>
             <th>Package Name</th>
-            <td>@Model.Name</td>
+            <td>@Model.FRDS.Name</td>
         </tr>
         <tr>
             <th>Date Created</th>
-            <td>@Model.CreationDate.ToLongDateString()</td>
+            <td>@Model.FRDS.CreationDate.ToLongDateString()</td>
         </tr>
         <tr>
             <th>Demand Owner</th>
-            <td>@Model.User.Email</td>
+            <td>@Model.FRDS.User.Email</td>
         </tr>
         <tr>
             <th>Approved</th>
-            <td>@Model.isApproved</td>
+            <td>@Model.FRDS.isApproved</td>
         </tr>
     </table>
-    @if (Model.isApproved == false)
+    <i class="fab fa-amilia"></i>
+    @if (Model.FRDS.isApproved == false)
     {
         using (Html.BeginForm("Approve", "FRD"))
         {
             @Html.AntiForgeryToken()
 
-            <input type="hidden" id="FrdId" name="FrdId" value="@Model.Id" />
+            <input type="hidden" id="FrdId" name="FrdId" value="@Model.FRDS.Id" />
 
-            <input type="hidden" id="DemandOwnerEmail" name="DemandOwnerEmail" value="@Model.User.Email" />
+            <input type="hidden" id="DemandOwnerEmail" name="DemandOwnerEmail" value="@Model.FRDS.User.Email" />
 
-            <input type="hidden" id="UserId" name="UserId" value="@Model.UserId" />
+            <input type="hidden" id="UserId" name="UserId" value="@Model.FRDS.UserId" />
 
-            <input type="hidden" id="FrdName" name="FrdName" value="@Model.Name" />
+            <input type="hidden" id="FrdName" name="FrdName" value="@Model.FRDS.Name" />
 
-            <input type="hidden" id="ManagerID" name="ManagerID" value="@Model.User.Department.Manager.UserId" />
+            <input type="hidden" id="ManagerID" name="ManagerID" value="@Model.FRDS.User.Department.Manager.UserId" />
 
             <button type="submit" class="btn btn-primary">Approve</button>
         }
     }
 
+            <h3>Approved Units</h3>
+
+    @foreach (var unit in Model.UnitApprovals)
+    {
+        var className = "";
+
+        {
+            if (unit.PendingApproval)
+            {
+                className = "fa-clock-o";
+            }
+            else
+            {
+                className = unit.IsApproved ? "fa-check" : "fa-times";
+            }
+
+        }
+            <p>
+                <i class="fa @className " aria-hidden="true"></i> @unit.Department.Name
+            </p>
+    }
+
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FRDS.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

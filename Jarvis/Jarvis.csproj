@@ -352,6 +352,18 @@
     <Compile Include="Migrations\201804121025270_AddUnitApprovalsDatabaseTable.Designer.cs">
       <DependentUpon>201804121025270_AddUnitApprovalsDatabaseTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804121232116_AddIsPendingToUnitApprovals.cs" />
+    <Compile Include="Migrations\201804121232116_AddIsPendingToUnitApprovals.Designer.cs">
+      <DependentUpon>201804121232116_AddIsPendingToUnitApprovals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804121237447_SetIsPendingToNotNull.cs" />
+    <Compile Include="Migrations\201804121237447_SetIsPendingToNotNull.Designer.cs">
+      <DependentUpon>201804121237447_SetIsPendingToNotNull.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804121249351_AddPendingApprovalToUnitApprovals.cs" />
+    <Compile Include="Migrations\201804121249351_AddPendingApprovalToUnitApprovals.Designer.cs">
+      <DependentUpon>201804121249351_AddPendingApprovalToUnitApprovals.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationOAuthProvider.cs" />
@@ -377,7 +389,10 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -388,6 +403,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -570,6 +590,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804121025270_AddUnitApprovalsDatabaseTable.resx">
       <DependentUpon>201804121025270_AddUnitApprovalsDatabaseTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804121232116_AddIsPendingToUnitApprovals.resx">
+      <DependentUpon>201804121232116_AddIsPendingToUnitApprovals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804121237447_SetIsPendingToNotNull.resx">
+      <DependentUpon>201804121237447_SetIsPendingToNotNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804121249351_AddPendingApprovalToUnitApprovals.resx">
+      <DependentUpon>201804121249351_AddPendingApprovalToUnitApprovals.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

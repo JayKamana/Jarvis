@@ -48,12 +48,20 @@ namespace Jarvis.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            FRD frd = _context.FRDS.Include(f => f.User).Include(f => f.Channels).Include(f => f.TargetAudiences).SingleOrDefault(f => f.Id == id);
+            var frd = _context.FRDS.Include(f => f.User).Include(f => f.Channels).Include(f => f.TargetAudiences).SingleOrDefault(f => f.Id == id);
+
             if (frd == null)
             {
                 return HttpNotFound();
             }
-            return View(frd);
+
+            var viewModel = new FRDDetailsViewModel
+            {
+                FRDS = frd,
+                UnitApprovals = _context.UnitApprovals.Where(u => u.FRDId == id).Include(u => u.Department)
+            };
+
+            return View(viewModel);
         }
 
 

@@ -9,6 +9,8 @@ namespace Jarvis.Models
     {
         public int Id { get; set; }
 
+        public bool PendingApproval { get; set; }
+
         public bool IsApproved { get; set; }
 
         public DateTime? ApprovalDate { get; set; }
