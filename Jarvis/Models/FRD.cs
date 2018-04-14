@@ -38,5 +38,6 @@ namespace Jarvis.Models
         public virtual ICollection<SMSDemand> SMSDemands { get; set; }
         public virtual ICollection<TargetAudience> TargetAudiences { get; set; }
         public virtual ICollection<Channel> Channels { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

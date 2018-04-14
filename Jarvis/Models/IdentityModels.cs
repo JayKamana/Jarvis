@@ -50,6 +50,8 @@ namespace Jarvis.Models
         public DbSet<Channel> Channels { get; set; }
         public DbSet<DistributionList> DistributionLists { get; set; }
         public DbSet<UnitApproval> UnitApprovals { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

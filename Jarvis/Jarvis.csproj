@@ -364,16 +364,22 @@
     <Compile Include="Migrations\201804121249351_AddPendingApprovalToUnitApprovals.Designer.cs">
       <DependentUpon>201804121249351_AddPendingApprovalToUnitApprovals.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804141500583_AddItemsAndComments.cs" />
+    <Compile Include="Migrations\201804141500583_AddItemsAndComments.Designer.cs">
+      <DependentUpon>201804141500583_AddItemsAndComments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationOAuthProvider.cs" />
     <Compile Include="Models\ChallengeResult.cs" />
     <Compile Include="Models\Channel.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\DistributionList.cs" />
     <Compile Include="Models\FRD.cs" />
     <Compile Include="Models\FRDApproveMessage.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RoleName.cs" />
@@ -601,6 +607,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804121249351_AddPendingApprovalToUnitApprovals.resx">
       <DependentUpon>201804121249351_AddPendingApprovalToUnitApprovals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804141500583_AddItemsAndComments.resx">
+      <DependentUpon>201804141500583_AddItemsAndComments.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
