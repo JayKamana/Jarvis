@@ -1,0 +1,71 @@
+﻿@model Jarvis.Models.FRD
+@{
+    ViewBag.Title = "Confirm";
+}
+
+<h2>Confirm</h2>
+
+<h2 class="text-center">Kibris Turkcell</h2>
+
+<table class="table table-bordered table-hover">
+
+    <tr>
+        <th>FRD Number</th>
+        <td>@Model.ReferenceNumber</td>
+    </tr>
+    <tr>
+        <th>Package Name</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Date Created</th>
+        <td>@Model.CreationDate.ToLongDateString()</td>
+    </tr>
+    <tr>
+        <th>Demand Owner</th>
+        <td>@Model.User.Email</td>
+    </tr>
+    <tr>
+        <th>Approved</th>
+        <td>@Model.isApproved</td>
+    </tr>
+</table>
+
+<div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" id="FrdId" name="FrdId" value="@Model.Id" />
+
+        <input type="hidden" id="IsApproved" name="IsApproved" value="False" />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-success status" value="True">Approve</button>
+                <button type="submit" class="btn btn-danger status" value="False">Deny</button>
+            </div>
+        </div>
+    }
+
+    @section Scripts {
+        <script>
+
+            $(function () {
+
+                $('.status').on('click', function () {
+
+                    var status = ($(this).val() === 'True');
+                    $('#IsApproved').val(status);
+
+                })
+
+            })
+
+        </script>
+    }
+
+
+</div>
+

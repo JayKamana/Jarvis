@@ -234,5 +234,53 @@ namespace Jarvis.Controllers
             return View(frd);
         }
 
+        public ActionResult UnitConfirm(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            FRD frd = _context.FRDS.Include(f => f.User).SingleOrDefault(f => f.Id == id);
+
+            if (frd == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(frd);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public  ActionResult UnitConfirm( UnitConfirmViewModel unitInfo)
+        {
+            var frd = _context.FRDS.SingleOrDefault(f => f.Id == unitInfo.FrdId);
+
+            if (ModelState.IsValid)
+            {
+
+
+                var UserId = User.Identity.GetUserId();
+
+                var currentUser = _context.Users.SingleOrDefault(c => c.Id == UserId);
+
+                var DepartmentId = currentUser.DepartmentId;
+
+                var unit = _context.UnitApprovals.SingleOrDefault(u => u.DepartmentId == DepartmentId && u.FRDId == unitInfo.FrdId);
+
+                unit.IsApproved = unitInfo.IsApproved;
+                unit.PendingApproval = false;
+                unit.ApprovalDate = DateTime.Now;
+                unit.ApprovedBy = currentUser.Email;
+
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(frd);
+        }
+
     }
 }

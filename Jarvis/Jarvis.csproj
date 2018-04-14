@@ -385,6 +385,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\FRDDetailsViewModel.cs" />
     <Compile Include="ViewModel\FRDDisplayViewModel.cs" />
+    <Compile Include="ViewModel\UnitConfirmViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -480,6 +481,7 @@
     <Content Include="Views\Channels\Details.cshtml" />
     <Content Include="Views\Channels\Edit.cshtml" />
     <Content Include="Views\Channels\Index.cshtml" />
+    <Content Include="Views\FRD\UnitConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
