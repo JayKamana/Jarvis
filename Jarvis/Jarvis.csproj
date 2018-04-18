@@ -160,6 +160,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebApiThrottle, Version=1.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebApiThrottle.1.5.4\lib\net45\WebApiThrottle.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -386,11 +389,14 @@
     <Compile Include="Models\SMSCode.cs" />
     <Compile Include="Models\SMSDemand.cs" />
     <Compile Include="Models\TargetAudience.cs" />
+    <Compile Include="Models\ThrottleAttribute.cs" />
     <Compile Include="Models\UnitApproval.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\FRDDetailsViewModel.cs" />
     <Compile Include="ViewModel\FRDDisplayViewModel.cs" />
+    <Compile Include="ViewModel\FRDItemsViewModel.cs" />
+    <Compile Include="ViewModel\NewCommentViewModel.cs" />
     <Compile Include="ViewModel\UnitConfirmViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -488,6 +494,7 @@
     <Content Include="Views\Channels\Edit.cshtml" />
     <Content Include="Views\Channels\Index.cshtml" />
     <Content Include="Views\FRD\UnitConfirm.cshtml" />
+    <Content Include="Views\FRD\GetItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

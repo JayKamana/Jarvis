@@ -64,6 +64,47 @@ namespace Jarvis.Controllers
             return View(viewModel);
         }
 
+        public ActionResult GetItems(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var viewModel = new FRDItemsViewModel
+            {
+                Items = _context.Items.Where(u => u.FRDId == id).Include(u => u.User).Include(u => u.Comments.Select(c => c.User))
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetItems(NewCommentViewModel comment)
+        {
+            if (ModelState.IsValid)
+            {
+                var newComment = new Comment();
+
+                newComment.ItemId = comment.ItemId;
+                newComment.DateAdded = DateTime.Now;
+                newComment.Details = comment.Details;
+                newComment.UserId = User.Identity.GetUserId();
+
+                _context.Comments.Add(newComment);
+                _context.SaveChanges();
+
+                var viewModel = new FRDItemsViewModel
+                {
+                    Items = _context.Items.Where(u => u.FRDId == comment.FRDId).Include(u => u.User).Include(u => u.Comments.Select(c => c.User))
+                };
+
+            }
+
+            return RedirectToAction("GetItems", comment.FRDId);
+        }
+
 
 
         public ActionResult Create()
@@ -118,11 +159,11 @@ namespace Jarvis.Controllers
                 var ManagerEmail = _context.Users.FirstOrDefault(u => u.Id == model.ManagerID).Email;
 
                 var body = "<h3>Request For FRD Approval</h3><p>The FRD <strong>" + model.FrdName + "</strong> by <strong>" + model.DemandOwnerEmail + "</strong> is currently awaiting your approval</p><p><a href='https://localhost:44391/frd/confirm/" + model.FrdId + "'>View FRD</a></p>";
-                var message = new MailMessage();  
+                var message = new MailMessage();
                 message.To.Add(new MailAddress(ManagerEmail));
 
-                message.From = new MailAddress("cmpe406gradproject@outlook.com");  
-  
+                message.From = new MailAddress("cmpe406gradproject@outlook.com");
+
                 message.Subject = "FRD Approval";
                 message.Body = string.Format(body, model.FrdId, model.DemandOwnerEmail, model.FrdName, model.ManagerID);
                 message.IsBodyHtml = true;
@@ -133,7 +174,7 @@ namespace Jarvis.Controllers
                 {
                     var credential = new NetworkCredential
                     {
-                        UserName = "cmpe406gradproject@outlook.com",  
+                        UserName = "cmpe406gradproject@outlook.com",
                         Password = "c05L!vyCwKBL"
                     };
                     smtp.Credentials = credential;
@@ -165,7 +206,7 @@ namespace Jarvis.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             return View(frd);
         }
 
@@ -173,7 +214,7 @@ namespace Jarvis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Confirm([Bind(Include = "id,Name,ReferenceNumber,CreationDate,UserId,isApproved")] FRD frd)
         {
-            
+
             if (ModelState.IsValid)
             {
                 _context.Entry(frd).State = EntityState.Modified;
@@ -253,7 +294,7 @@ namespace Jarvis.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  ActionResult UnitConfirm( UnitConfirmViewModel unitInfo)
+        public ActionResult UnitConfirm(UnitConfirmViewModel unitInfo)
         {
             var frd = _context.FRDS.SingleOrDefault(f => f.Id == unitInfo.FrdId);
 
@@ -281,6 +322,6 @@ namespace Jarvis.Controllers
 
             return View(frd);
         }
-
     }
+
 }

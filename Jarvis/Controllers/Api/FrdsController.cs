@@ -11,6 +11,7 @@ using AutoMapper;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
+using System.Web.Http.Filters;
     
 namespace Jarvis.Controllers.Api
 {
@@ -30,6 +31,7 @@ namespace Jarvis.Controllers.Api
         //    return Ok(_context.FRDS.ToList());
         //}
 
+        //[Throttle(Name = "TestThrottle", Message = "You must wait {n} seconds before accessing this url again.", Seconds = 5)]
         public IHttpActionResult GetFRD()
         {
             var frdDtos = _context.FRDS.Include(c => c.User).ToList().Select(Mapper.Map<FRD, FRDDtos>);

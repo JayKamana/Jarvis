@@ -5,6 +5,7 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using WebApiThrottle;
 
 namespace Jarvis
 {

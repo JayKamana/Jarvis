@@ -1,0 +1,33 @@
+﻿@model Jarvis.ViewModel.FRDItemsViewModel
+@{
+    ViewBag.Title = "GetItems";
+}
+
+<div>
+    @foreach (var item in Model.Items)
+    {
+        <details>
+            <summary><strong>@item.User.Email/ @item.DateAdded.ToShortDateString()</strong> @item.Details</summary>
+            @if (item.Comments.Count > 0)
+            {
+                <ul>
+                    @foreach (var comment in item.Comments)
+                    {
+                        <li><strong>@comment.User.Email/ @comment.DateAdded.ToShortDateString()</strong> @comment.Details</li>
+                    }
+                </ul>
+            }
+            @using (Html.BeginForm("GetItems", "FRD"))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <textarea class="form-control" rows="5" id="Details" name="Details"></textarea>
+                    <input type="hidden" id="ItemId" name="ItemId" value=@item.Id />
+                    <input type="hidden" id="FRDId" name="FRDId" value=@item.FRDId />
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            }
+        </details>
+    }
+</div>
