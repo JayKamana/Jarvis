@@ -3,31 +3,53 @@
     ViewBag.Title = "GetItems";
 }
 
-<div>
-    @foreach (var item in Model.Items)
-    {
-        <details>
-            <summary><strong>@item.User.Email/ @item.DateAdded.ToShortDateString()</strong> @item.Details</summary>
-            @if (item.Comments.Count > 0)
-            {
-                <ul>
-                    @foreach (var comment in item.Comments)
-                    {
-                        <li><strong>@comment.User.Email/ @comment.DateAdded.ToShortDateString()</strong> @comment.Details</li>
-                    }
-                </ul>
-            }
-            @using (Html.BeginForm("GetItems", "FRD"))
-            {
-                @Html.AntiForgeryToken()
+<div class="col-md-offset-1 col-md-10" style="margin-top: 40px">
 
-                <div class="form-group">
-                    <textarea class="form-control" rows="5" id="Details" name="Details"></textarea>
-                    <input type="hidden" id="ItemId" name="ItemId" value=@item.Id />
-                    <input type="hidden" id="FRDId" name="FRDId" value=@item.FRDId />
-                    <button type="submit" class="btn btn-primary">Send</button>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        @foreach (var item in Model.Items)
+        {
+            var headingid = "heading" + item.Id;
+            var collapseid = "collapse" + item.Id;
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="@headingid">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@collapseid" aria-expanded="true" aria-controls="@collapseid">
+                            <strong>@item.User.Email </strong><span class="comment-date">@item.DateAdded.ToShortDateString()</span>  @item.Details
+                        </a>
+                    </h4>
                 </div>
-            }
-        </details>
-    }
+                <div id="@collapseid" class="panel-collapse collapse" role="tabpanel" aria-labelledby="@headingid">
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            @foreach (var comment in item.Comments)
+        {
+                    <li class="list-group-item"><strong>@comment.User.Email/ <span class="comment-date">@comment.DateAdded.ToShortDateString()</span></strong> @comment.Details</li>
+}
+                        </ul>
+                        @using (Html.BeginForm("GetItems", "FRD"))
+    {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <textarea class="form-control" rows="5" id="Details" name="Details"></textarea>
+                        <input type="hidden" id="ItemId" name="ItemId" value=@item.Id />
+                        <input type="hidden" id="FRDId" name="FRDId" value=@item.FRDId />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send</button>
+}
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
 </div>
+
+
+@section Scripts {
+    <script>
+
+
+    </script>
+}

@@ -12,7 +12,8 @@ using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
 using System.Web.Http.Filters;
-    
+using PushSharp.Google;
+
 namespace Jarvis.Controllers.Api
 {
     [Authorize]
@@ -35,6 +36,33 @@ namespace Jarvis.Controllers.Api
         public IHttpActionResult GetFRD()
         {
             var frdDtos = _context.FRDS.Include(c => c.User).ToList().Select(Mapper.Map<FRD, FRDDtos>);
+
+            //var SENDER_ID = "turkcell-201718";
+            //string GoogleAppId = "AIzaSyB-ojEs1wHghb2fEy6RNifr3BpV9HzwCC4";
+
+            //var config = new GcmConfiguration(SENDER_ID, GoogleAppId, null);
+
+            //var gcmBroker = new GcmServiceBroker(config);
+
+            //gcmBroker.OnNotificationFailed += (notification, aggregateEx) =>
+            //{
+            //    aggregateEx.Handle(ex =>
+            //    {
+            //        if (ex is GcmNotificationException)
+            //        {
+            //            var notificationException = (GcmNotificationException)ex;
+            //            var gcmNotification = notificationException.Notification;
+            //            var description = notificationException.Description;
+            //            string desc = $"GCM Notifiactin Failed: ID={gcmNotification.MessageId}, Desc={description}";
+            //        }
+
+            //        else if{
+
+            //        }
+            //    })
+            //}
+
+            //gcmBroker.Start();
 
             return Ok(frdDtos);
         }

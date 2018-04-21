@@ -40,3 +40,10 @@ textarea {
 .fa-clock-o {
     color: blue;
 }
+
+.comment-date {
+    color: #bf2222;
+    font-weight: 300;
+    font-size: 1.4rem;
+}
+
