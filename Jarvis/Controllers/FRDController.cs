@@ -237,7 +237,6 @@ namespace Jarvis.Controllers
 
                 var distributionList = _context.DistributionLists.Include(d => d.User).ToList();
 
-
                 foreach (var member in distributionList)
                 {
                     var memberEmail = member.User.Email;

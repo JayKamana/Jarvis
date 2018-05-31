@@ -15,7 +15,7 @@
                 <div class="panel-heading" role="tab" id="@headingid">
                     <h4 class="panel-title">
                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@collapseid" aria-expanded="true" aria-controls="@collapseid">
-                            <strong>@item.User.Email </strong><span class="comment-date">@item.DateAdded.ToShortDateString()</span>  @item.Details
+                            <strong>@item.User.Email </strong><span class="comment-date">@item.DateAdded.ToShortDateString()</span>:  @item.Details
                         </a>
                     </h4>
                 </div>
@@ -24,7 +24,7 @@
                         <ul class="list-group">
                             @foreach (var comment in item.Comments)
         {
-                    <li class="list-group-item"><strong>@comment.User.Email/ <span class="comment-date">@comment.DateAdded.ToShortDateString()</span></strong> @comment.Details</li>
+                    <li class="list-group-item"><strong>@comment.User.Email/ </strong><span class="comment-date">@comment.DateAdded.ToShortDateString()</span>: @comment.Details</li>
 }
                         </ul>
                         @using (Html.BeginForm("GetItems", "FRD"))

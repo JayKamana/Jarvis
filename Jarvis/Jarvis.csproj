@@ -392,6 +392,10 @@
     <Compile Include="Migrations\201804141500583_AddItemsAndComments.Designer.cs">
       <DependentUpon>201804141500583_AddItemsAndComments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805311808110_CreateFRDChannelMapping.cs" />
+    <Compile Include="Migrations\201805311808110_CreateFRDChannelMapping.Designer.cs">
+      <DependentUpon>201805311808110_CreateFRDChannelMapping.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationOAuthProvider.cs" />
@@ -402,6 +406,7 @@
     <Compile Include="Models\DistributionList.cs" />
     <Compile Include="Models\FRD.cs" />
     <Compile Include="Models\FRDApproveMessage.cs" />
+    <Compile Include="Models\FRDChannelMapping.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Manager.cs" />
@@ -638,6 +643,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804141500583_AddItemsAndComments.resx">
       <DependentUpon>201804141500583_AddItemsAndComments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805311808110_CreateFRDChannelMapping.resx">
+      <DependentUpon>201805311808110_CreateFRDChannelMapping.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

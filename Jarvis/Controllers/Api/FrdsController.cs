@@ -13,10 +13,11 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
 using System.Web.Http.Filters;
 using PushSharp.Google;
+using System.IO;
 
 namespace Jarvis.Controllers.Api
 {
-    [Authorize]
+    //[Authorize]
     public class FrdsController : ApiController
     {
         private ApplicationDbContext _context;
@@ -37,32 +38,7 @@ namespace Jarvis.Controllers.Api
         {
             var frdDtos = _context.FRDS.Include(c => c.User).ToList().Select(Mapper.Map<FRD, FRDDtos>);
 
-            //var SENDER_ID = "turkcell-201718";
-            //string GoogleAppId = "AIzaSyB-ojEs1wHghb2fEy6RNifr3BpV9HzwCC4";
-
-            //var config = new GcmConfiguration(SENDER_ID, GoogleAppId, null);
-
-            //var gcmBroker = new GcmServiceBroker(config);
-
-            //gcmBroker.OnNotificationFailed += (notification, aggregateEx) =>
-            //{
-            //    aggregateEx.Handle(ex =>
-            //    {
-            //        if (ex is GcmNotificationException)
-            //        {
-            //            var notificationException = (GcmNotificationException)ex;
-            //            var gcmNotification = notificationException.Notification;
-            //            var description = notificationException.Description;
-            //            string desc = $"GCM Notifiactin Failed: ID={gcmNotification.MessageId}, Desc={description}";
-            //        }
-
-            //        else if{
-
-            //        }
-            //    })
-            //}
-
-            //gcmBroker.Start();
+            string result = SendNotificationFromFirebaseCloud();
 
             return Ok(frdDtos);
         }
@@ -143,6 +119,36 @@ namespace Jarvis.Controllers.Api
             return Ok();
         }
 
+        public static string SendNotificationFromFirebaseCloud()
+        {
+            var result = "-1";
+            var webAddr = "https://fcm.googleapis.com/fcm/send";
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(webAddr);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Headers.Add(HttpRequestHeader.Authorization, "key=AAAAaSw0DgA:APA91bHWxzRlmcQJTFDkHPeVoSS_8G8PuN_WiXXslGrFEtPtx6x10tBXNlTP2UFBqEsfmyFDsf_OGScMmglX6hj9SjmnT1d_j329er8AOvuv9vx1huSpKgQVu-7fFXVeYOF37ElVGGc3");
+            httpWebRequest.Method = "POST";
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                string strNJson = @"{
+                    ""to"": ""/topics/Turkcell"",
+                    ""notification"": {
+                    ""title"": ""From Firebase"",
+                    ""text"": ""This is Notification"",
+                    ""sound"":""default""
+                    }
+                }";
 
+                streamWriter.Write(strNJson);
+                streamWriter.Flush();
+            }
+
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+            }
+            return result;
+
+        }
     }
 }
