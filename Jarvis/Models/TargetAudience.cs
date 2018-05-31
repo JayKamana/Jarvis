@@ -19,5 +19,7 @@ namespace Jarvis.Models
         public String Name { get; set; }
 
         public virtual ICollection<FRD> FRDS { get; set; }
+        public virtual ICollection<FRDAudienceMapping> FRDAudienceMappings { get; set; }
+
     }
 }

@@ -52,6 +52,8 @@ namespace Jarvis.Models
         public DbSet<UnitApproval> UnitApprovals { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<FRDAudienceMapping> FRDAudienceMappings { get; set; }
+        public DbSet<FRDChannelMapping> FRDChannelMappings { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

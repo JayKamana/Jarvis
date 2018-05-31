@@ -40,5 +40,7 @@ namespace Jarvis.Models
         public virtual ICollection<Channel> Channels { get; set; }
         public virtual ICollection<Item> Items { get; set; }
         public virtual ICollection<FRDChannelMapping> FRDChannelMappings { get; set; }
+        public virtual ICollection<FRDAudienceMapping> FRDAudienceMappings { get; set; }
+
     }
 }
