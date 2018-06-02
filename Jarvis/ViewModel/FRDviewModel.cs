@@ -20,7 +20,7 @@ namespace Jarvis.ViewModel
         [Required(ErrorMessage = "The reference number cannot be blank")]
         [Range(0, 10000, ErrorMessage = "Please enter a reference number")]
         [RegularExpression(@"^[0-9\s]*$", ErrorMessage = "Please enter a reference number made up of numbers only")]
-        public int ReferenceNumberrice { get; set; }
+        public int ReferenceNumber { get; set; }
 
     
         public List<SelectList> ChannelLists { get; set; }

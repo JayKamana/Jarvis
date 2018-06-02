@@ -109,7 +109,22 @@ namespace Jarvis.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            FRDviewModel viewModel = new FRDviewModel();        
+            viewModel.ChannelLists = new List<SelectList>();
+            viewModel.AudienceLists = new List<SelectList>();
+
+            for (int i = 0; i < Constants.NumberOfChannels; i++)
+            {
+                viewModel.ChannelLists.Add(new SelectList(_context.Channels, "ID", "Name"));
+            }
+
+            for (int i = 0; i < Constants.NumberOfTargetAudience; i++)
+            {
+                viewModel.AudienceLists.Add(new SelectList(_context.TargetAudiences, "ID", "Name"));
+            }
+
+            return View(viewModel);
+
         }
 
         [HttpPost]
