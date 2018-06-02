@@ -427,6 +427,7 @@
     <Compile Include="ViewModel\FRDDetailsViewModel.cs" />
     <Compile Include="ViewModel\FRDDisplayViewModel.cs" />
     <Compile Include="ViewModel\FRDItemsViewModel.cs" />
+    <Compile Include="ViewModel\FRDviewModel.cs" />
     <Compile Include="ViewModel\NewCommentViewModel.cs" />
     <Compile Include="ViewModel\UnitConfirmViewModel.cs" />
   </ItemGroup>
