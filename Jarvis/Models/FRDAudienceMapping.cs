@@ -12,6 +12,8 @@ namespace Jarvis.Models
         public int FRDId { get; set; }
         public int TargetAudienceId { get; set; }
 
+        public int AudienceNumber { get; set; }
+
         public virtual FRD FRD { get; set; }
         public virtual TargetAudience TargetAudiences { get; set; }
     }

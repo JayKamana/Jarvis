@@ -401,6 +401,10 @@
     <Compile Include="Migrations\201805311839068_CreateFRDAudienceMapping.Designer.cs">
       <DependentUpon>201805311839068_CreateFRDAudienceMapping.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806022034599_ChannelNumberAndTargetNumber.cs" />
+    <Compile Include="Migrations\201806022034599_ChannelNumberAndTargetNumber.Designer.cs">
+      <DependentUpon>201806022034599_ChannelNumberAndTargetNumber.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationOAuthProvider.cs" />
@@ -656,6 +660,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805311839068_CreateFRDAudienceMapping.resx">
       <DependentUpon>201805311839068_CreateFRDAudienceMapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806022034599_ChannelNumberAndTargetNumber.resx">
+      <DependentUpon>201806022034599_ChannelNumberAndTargetNumber.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

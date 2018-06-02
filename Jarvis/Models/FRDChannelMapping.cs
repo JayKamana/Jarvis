@@ -11,6 +11,8 @@ namespace Jarvis.Models
         public int FRDId { get; set; }
         public int ChannelId { get; set; }
 
+        public int ChannelNumber { get; set; }
+
         public virtual FRD FRD { get; set; }
         public virtual Channel Channel { get; set; }
     }

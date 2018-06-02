@@ -129,19 +129,64 @@ namespace Jarvis.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ReferenceNumber,Name,CreationDate,UserId,isApproved")] FRD fRD)
+        public ActionResult Create( FRDviewModel viewModel)
         {
+            FRD frd = new FRD();
+
+            frd.Name = viewModel.Name;
+            frd.isApproved = false;
+            frd.UserId = User.Identity.GetUserId();
+            frd.CreationDate = DateTime.Now;
+
+            frd.FRDChannelMappings = new List<FRDChannelMapping>();
+            frd.FRDAudienceMappings = new List<FRDAudienceMapping>();
+
+            string[] channels = viewModel.Channels.Where(pi => !string.IsNullOrEmpty(pi)).ToArray();
+
+            for (int i = 0; i < channels.Length; i++)
+            {
+                frd.FRDChannelMappings.Add(new FRDChannelMapping
+                {
+                    Channel = _context.Channels.Find(int.Parse(channels[i])),
+                    ChannelNumber = i
+                });
+            }
+
+            string[] audiences = viewModel.TargetAudiences.Where(pi => !string.IsNullOrEmpty(pi)).ToArray();
+
+            for (int i = 0; i < audiences.Length; i++)
+            {
+                frd.FRDAudienceMappings.Add(new FRDAudienceMapping
+                {
+                    TargetAudiences = _context.TargetAudiences.Find(int.Parse(channels[i])),
+                    AudienceNumber = i
+                });
+            }
+
+
             if (ModelState.IsValid)
             {
-                fRD.CreationDate = DateTime.Now;
-                fRD.isApproved = false;
-                fRD.UserId = User.Identity.GetUserId();
-                _context.FRDS.Add(fRD);
+                _context.FRDS.Add(frd);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(fRD);
+        
+            viewModel.ChannelLists = new List<SelectList>();
+            for (int i = 0; i < Constants.NumberOfChannels; i++)
+            {
+                viewModel.ChannelLists.Add(new SelectList(_context.Channels, "ID", "Name",
+                viewModel.Channels[i]));
+            }
+
+            viewModel.AudienceLists = new List<SelectList>();
+            for (int i = 0; i < Constants.NumberOfTargetAudience; i++)
+            {
+                viewModel.AudienceLists.Add(new SelectList(_context.TargetAudiences, "ID", "Name",
+                viewModel.TargetAudiences[i]));
+            }
+
+            return View(frd);
         }
 
         public ActionResult Approve(int? id)
