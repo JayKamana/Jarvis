@@ -134,6 +134,7 @@ namespace Jarvis.Controllers
             FRD frd = new FRD();
 
             frd.Name = viewModel.Name;
+            frd.ReferenceNumber = viewModel.ReferenceNumber;
             frd.isApproved = false;
             frd.UserId = User.Identity.GetUserId();
             frd.CreationDate = DateTime.Now;
@@ -141,7 +142,7 @@ namespace Jarvis.Controllers
             frd.FRDChannelMappings = new List<FRDChannelMapping>();
             frd.FRDAudienceMappings = new List<FRDAudienceMapping>();
 
-            string[] channels = viewModel.Channels.Where(pi => !string.IsNullOrEmpty(pi)).ToArray();
+            string[] channels = viewModel.Channels.Where(c => !string.IsNullOrEmpty(c)).ToArray();
 
             for (int i = 0; i < channels.Length; i++)
             {
@@ -152,13 +153,13 @@ namespace Jarvis.Controllers
                 });
             }
 
-            string[] audiences = viewModel.TargetAudiences.Where(pi => !string.IsNullOrEmpty(pi)).ToArray();
+            string[] audiences = viewModel.TargetAudiences.Where(t => !string.IsNullOrEmpty(t)).ToArray();
 
             for (int i = 0; i < audiences.Length; i++)
             {
                 frd.FRDAudienceMappings.Add(new FRDAudienceMapping
                 {
-                    TargetAudiences = _context.TargetAudiences.Find(int.Parse(channels[i])),
+                    TargetAudiences = _context.TargetAudiences.Find(int.Parse(audiences[i])),
                     AudienceNumber = i
                 });
             }
@@ -186,7 +187,7 @@ namespace Jarvis.Controllers
                 viewModel.TargetAudiences[i]));
             }
 
-            return View(frd);
+            return View(viewModel);
         }
 
         public ActionResult Approve(int? id)

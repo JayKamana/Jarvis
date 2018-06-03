@@ -33,28 +33,31 @@
             <td>@Model.FRDS.isApproved</td>
         </tr>
     </table>
-    <i class="fab fa-amilia"></i>
-    @if (Model.FRDS.isApproved == false)
+    <h3>Channels</h3>
+    @if (Model.FRDS.FRDChannelMappings != null && Model.FRDS.FRDChannelMappings.Any())
     {
-        using (Html.BeginForm("Approve", "FRD"))
-        {
-            @Html.AntiForgeryToken()
-
-            <input type="hidden" id="FrdId" name="FrdId" value="@Model.FRDS.Id" />
-
-            <input type="hidden" id="DemandOwnerEmail" name="DemandOwnerEmail" value="@Model.FRDS.User.Email" />
-
-            <input type="hidden" id="UserId" name="UserId" value="@Model.FRDS.UserId" />
-
-            <input type="hidden" id="FrdName" name="FrdName" value="@Model.FRDS.Name" />
-
-            <input type="hidden" id="ManagerID" name="ManagerID" value="@Model.FRDS.User.Department.Manager.UserId" />
-
-            <button type="submit" class="btn btn-primary">Approve</button>
-        }
+        <dd>
+            @foreach (var item in Model.FRDS.FRDChannelMappings.OrderBy(c =>
+            c.ChannelNumber))
+            {
+                <p>@item.Channel.Name</p>
+            }
+        </dd>
     }
 
-            <h3>Approved Units</h3>
+    <h3>Target Audience</h3>
+    @if (Model.FRDS.FRDAudienceMappings != null && Model.FRDS.FRDAudienceMappings.Any())
+    {
+        <dd>
+            @foreach (var item in Model.FRDS.FRDAudienceMappings.OrderBy(t =>
+            t.AudienceNumber))
+            {
+                <p>@item.TargetAudiences.Name</p>
+            }
+        </dd>
+    }
+
+    <h3>Approved Units</h3>
 
     @foreach (var unit in Model.UnitApprovals)
     {
@@ -71,9 +74,9 @@
             }
 
         }
-            <p>
-                <i class="fa @className " aria-hidden="true"></i> @unit.Department.Name
-            </p>
+        <p>
+            <i class="fa @className " aria-hidden="true"></i> @unit.Department.Name
+        </p>
     }
 
 </div>
