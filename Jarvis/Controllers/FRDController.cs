@@ -64,6 +64,156 @@ namespace Jarvis.Controllers
             return View(viewModel);
         }
 
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            FRD frd = _context.FRDS.Find(id);
+            if (frd == null)
+            {
+                return HttpNotFound();
+            }
+
+            FRDviewModel viewModel = new FRDviewModel();
+            viewModel.ChannelLists = new List<SelectList>();
+            viewModel.AudienceLists = new List<SelectList>();
+
+            foreach (var channelMapping in frd.FRDChannelMappings.OrderBy(c => c.ChannelNumber))
+            {
+                viewModel.ChannelLists.Add(new SelectList(_context.Channels, "ID", "Name",
+                channelMapping.ChannelId));
+            }
+            for (int i = viewModel.ChannelLists.Count; i < Constants.NumberOfChannels; i++)
+            {
+                viewModel.ChannelLists.Add(new SelectList(_context.Channels, "ID", "Name"));
+            }
+
+            foreach (var audienceMapping in frd.FRDAudienceMappings.OrderBy(t => t.AudienceNumber))
+            {
+                viewModel.AudienceLists.Add(new SelectList(_context.TargetAudiences, "ID", "Name",
+                audienceMapping.TargetAudienceId));
+            }
+            for (int i = viewModel.AudienceLists.Count; i < Constants.NumberOfTargetAudience; i++)
+            {
+                viewModel.AudienceLists.Add(new SelectList(_context.TargetAudiences, "ID", "Name"));
+            }
+            viewModel.Id = frd.Id;
+            viewModel.Name = frd.Name;
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(FRDviewModel viewModel)
+        {
+            var frdToUpdate = _context.FRDS.Include(f => f.FRDChannelMappings).Include(f => f.FRDAudienceMappings).Where(f => f.Id == viewModel.Id).Single();
+            if (TryUpdateModel(frdToUpdate, "", new string[] { "Name"}))
+            {
+                if (frdToUpdate.FRDChannelMappings == null)
+                {
+                    frdToUpdate.FRDChannelMappings = new List<FRDChannelMapping>();
+                }
+
+                if (frdToUpdate.FRDAudienceMappings == null)
+                {
+                    frdToUpdate.FRDAudienceMappings = new List<FRDAudienceMapping>();
+                }
+
+                string[] channels = viewModel.Channels.Where(c =>
+                !string.IsNullOrEmpty(c)).ToArray();
+                for (int i = 0; i < channels.Length; i++)
+                {
+
+                    var channelToEdit = frdToUpdate.FRDChannelMappings.Where(c =>
+                    c.ChannelNumber == i).FirstOrDefault();
+
+                    var channel = _context.Channels.Find(int.Parse(channels[i]));
+
+                    if (channelToEdit == null)
+                    {
+
+                        frdToUpdate.FRDChannelMappings.Add(new FRDChannelMapping
+                        {
+                            ChannelNumber = i,
+                            Channel = channel,
+                            ChannelId = channel.Id
+                        });
+                    }
+
+                    else
+                    {
+
+                        if (channelToEdit.ChannelId != int.Parse(channels[i]))
+                        {
+
+                            channelToEdit.Channel = channel;
+                        }
+                    }
+                }
+
+                for (int i = channels.Length; i < Constants.NumberOfChannels; i++)
+                {
+                    var channelMappingToEdit = frdToUpdate.FRDChannelMappings.Where(c =>
+                    c.ChannelNumber == i).FirstOrDefault();
+
+                    if (channelMappingToEdit != null)
+                    {
+                        _context.FRDChannelMappings.Remove(channelMappingToEdit);
+                    }
+                }
+
+                string[] audiences = viewModel.TargetAudiences.Where(t => !string.IsNullOrEmpty(t)).ToArray();
+                for (int i = 0; i < audiences.Length; i++)
+                {
+
+                    var audienceToEdit = frdToUpdate.FRDAudienceMappings.Where(t =>
+                    t.AudienceNumber == i).FirstOrDefault();
+
+                    var audience = _context.TargetAudiences.Find(int.Parse(audiences[i]));
+
+                    if (audienceToEdit == null)
+                    {
+
+                        frdToUpdate.FRDAudienceMappings.Add(new FRDAudienceMapping
+                        {
+                            AudienceNumber = i,
+                            TargetAudiences = audience,
+                            TargetAudienceId = audience.Id
+                        });
+                    }
+
+                    else
+                    {
+
+                        if (audienceToEdit.TargetAudienceId != int.Parse(audiences[i]))
+                        {
+
+                            audienceToEdit.TargetAudiences = audience;
+                        }
+                    }
+                }
+
+                for (int i = audiences.Length; i < Constants.NumberOfTargetAudience; i++)
+                {
+                    var audienceMappingToEdit = frdToUpdate.FRDAudienceMappings.Where(t =>
+                    t.AudienceNumber == i).FirstOrDefault();
+
+                    if (audienceMappingToEdit != null)
+                    {
+                        _context.FRDAudienceMappings.Remove(audienceMappingToEdit);
+                    }
+                }
+
+
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(viewModel);
+        }
+
         public ActionResult GetItems(int? id)
         {
             if (id == null)
@@ -167,6 +317,20 @@ namespace Jarvis.Controllers
 
             if (ModelState.IsValid)
             {
+
+                var units = _context.Departments.Where(d => d.CanApproveFRD == true);
+
+
+                foreach (var unit in units)
+                {
+                    UnitApproval newUnit = new UnitApproval();
+
+                    newUnit.DepartmentId = unit.Id;
+                    newUnit.FRDId = frd.Id;
+
+                    _context.UnitApprovals.Add(newUnit);
+                }
+
                 _context.FRDS.Add(frd);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -281,18 +445,6 @@ namespace Jarvis.Controllers
                 _context.Entry(frd).State = EntityState.Modified;
                 _context.SaveChanges();
 
-                var units = _context.Departments.Where(d => d.CanApproveFRD == true);
-
-
-                foreach (var unit in units)
-                {
-                    UnitApproval newUnit = new UnitApproval();
-
-                    newUnit.DepartmentId = unit.Id;
-                    newUnit.FRDId = frd.Id;
-
-                    _context.UnitApprovals.Add(newUnit);
-                }
 
                 _context.SaveChanges();
 

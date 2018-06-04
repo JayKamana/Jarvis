@@ -532,6 +532,7 @@
     <Content Include="Views\Channels\Index.cshtml" />
     <Content Include="Views\FRD\UnitConfirm.cshtml" />
     <Content Include="Views\FRD\GetItems.cshtml" />
+    <Content Include="Views\FRD\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
