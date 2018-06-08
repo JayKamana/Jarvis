@@ -109,7 +109,25 @@ namespace Jarvis.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
             Channel channel = db.Channels.Find(id);
+
+            var mappings = channel.FRDChannelMappings.Where(fcm => fcm.ChannelId == id);
+            foreach (var mapping in mappings)
+            {
+
+                var mappingsToUpdate = db.FRDChannelMappings.Where(fcm => fcm.ChannelId ==
+                mapping.FRDId);
+
+                foreach (var mappingToUpdate in mappingsToUpdate)
+                {
+                    if (mappingToUpdate.ChannelNumber > mapping.ChannelNumber)
+                    {
+                        mappingToUpdate.ChannelNumber--;
+                    }
+                }
+            }
+
             db.Channels.Remove(channel);
             db.SaveChanges();
             return RedirectToAction("Index");
