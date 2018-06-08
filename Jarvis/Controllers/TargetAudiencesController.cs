@@ -110,6 +110,23 @@ namespace Jarvis.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             TargetAudience targetAudience = db.TargetAudiences.Find(id);
+
+            var mappings = targetAudience.FRDAudienceMappings.Where(fam => fam.TargetAudienceId == id);
+            foreach (var mapping in mappings)
+            {
+
+                var mappingsToUpdate = db.FRDAudienceMappings.Where(fam => fam.FRDId ==
+                mapping.FRDId);
+
+                foreach (var mappingToUpdate in mappingsToUpdate)
+                {
+                    if (mappingToUpdate.AudienceNumber > mapping.AudienceNumber)
+                    {
+                        mappingToUpdate.AudienceNumber--;
+                    }
+                }
+            }
+
             db.TargetAudiences.Remove(targetAudience);
             db.SaveChanges();
             return RedirectToAction("Index");

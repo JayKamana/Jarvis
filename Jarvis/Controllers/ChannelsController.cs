@@ -116,7 +116,7 @@ namespace Jarvis.Controllers
             foreach (var mapping in mappings)
             {
 
-                var mappingsToUpdate = db.FRDChannelMappings.Where(fcm => fcm.ChannelId ==
+                var mappingsToUpdate = db.FRDChannelMappings.Where(fcm => fcm.FRDId ==
                 mapping.FRDId);
 
                 foreach (var mappingToUpdate in mappingsToUpdate)
